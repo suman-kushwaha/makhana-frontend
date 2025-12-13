@@ -32,6 +32,15 @@ export default function Navbar() {
                             {cartItems.length}
                         </span>
                     </Link>
+                    <a
+                        href="https://wa.me/919871437317?text=Hi%2C%20I%20am%20interested%20in%20your%20makhana%20products."
+                        target="_blank"
+                        rel="noreferrer"
+                        className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
+                    >
+                        WhatsApp
+                    </a>
+
 
                 </div>
 
@@ -46,12 +55,34 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {open && (
-                <div className="md:hidden mt-3 flex flex-col gap-3  px-4 py-4 shadow-sm">
-                    <Link to="/" onClick={() => setOpen(false)}>Home</Link>
-                    <Link to="/products" onClick={() => setOpen(false)}>Products</Link>
-                    <Link to="/cart" onClick={() => setOpen(false)}>Cart</Link>
+                <div className="md:hidden mt-3 bg-white border-t flex flex-col gap-4 px-4 py-4 shadow-sm">
+
+                    <Link to="/" onClick={() => setOpen(false)}>
+                        Home
+                    </Link>
+
+                    <Link to="/products" onClick={() => setOpen(false)}>
+                        Products
+                    </Link>
+
+                    <Link to="/cart" onClick={() => setOpen(false)}>
+                        Cart ({cartItems.length})
+                    </Link>
+
+                    {/* WhatsApp Button */}
+                    <a
+                        href="https://wa.me/919871437317?text=Hi%2C%20I%20am%20interested%20in%20your%20makhana%20products."
+                        target="_blank"
+                        rel="noreferrer"
+                        className="bg-green-600 text-white px-4 py-2 rounded-md text-center"
+                        onClick={() => setOpen(false)}
+                    >
+                        WhatsApp
+                    </a>
+
                 </div>
             )}
+
         </nav>
     )
 }

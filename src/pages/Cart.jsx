@@ -3,6 +3,34 @@ import { useCart } from "../context/CartContext"
 export default function Cart() {
   const { cartItems, removeFromCart } = useCart()
 
+  const total = cartItems.reduce(
+    (sum, item) => sum + Number(item.price),
+    0
+  )
+
+  const handleCheckout = () => {
+  const itemsText = cartItems
+    .map(
+      (item, index) =>
+        `${index + 1}. ${item.name} (${item.weight}) - ₹${item.price}`
+    )
+    .join("\n")
+
+  const message = `
+New Order:
+${itemsText}
+
+Total Amount: ₹${total}
+  `
+
+  const whatsappURL = `https://wa.me/919871437317?text=${encodeURIComponent(
+    message
+  )}`
+
+  window.open(whatsappURL, "_blank")
+}
+
+
   if (cartItems.length === 0) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-10 text-center">
@@ -44,6 +72,20 @@ export default function Cart() {
 
           </div>
         ))}
+        <div className="mt-8 border-t pt-4">
+          <div className="flex justify-between items-center text-lg font-semibold">
+            <span>Total</span>
+            <span>₹{total}</span>
+          </div>
+
+          <button
+            onClick={handleCheckout}
+            className="mt-4 w-full bg-green-700 text-white py-3 rounded-md hover:bg-green-800 transition"
+          >
+            Proceed to Checkout
+          </button>
+        </div>
+
       </div>
     </div>
   )

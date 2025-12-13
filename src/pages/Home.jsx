@@ -1,4 +1,5 @@
 import ProductCard from "../component/ProductCard"
+import { useState } from "react"
 
 const products = [
   {
@@ -32,6 +33,40 @@ const products = [
 ]
 
 export default function Home() {
+  const [enquiry, setEnquiry] = useState({
+    name: "",
+    company: "",
+    city: "",
+    volume: "",
+    mobile: "",
+    email: "",
+  })
+  const handleEnquirySubmit = () => {
+    const message = `
+Bulk Enquiry:
+Name: ${enquiry.name}
+Company: ${enquiry.company}
+City: ${enquiry.city}
+Order Volume: ${enquiry.volume} kg
+Mobile: ${enquiry.mobile}
+Email: ${enquiry.email}
+  `
+
+    const whatsappURL = `https://wa.me/919871437317?text=${encodeURIComponent(
+      message
+    )}`
+
+    window.open(whatsappURL, "_blank")
+  }
+
+  const handleChange = (e) => {
+  const { name, value } = e.target
+  setEnquiry((prev) => ({
+    ...prev,
+    [name]: value,
+  }))
+}
+
   return (
     <div>
       {/* Hero Section */}
@@ -116,78 +151,97 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
       {/* Distributors & Bulk Buyers */}
       <section className="py-16 bg-white">
-     <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-    
-    {/* Left Content */}
-    <div>
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">
-        Distributors & Bulk Buyers
-      </h2>
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
 
-      <p className="text-gray-600 mb-4">
-        We supply bulk quantities with private-labeling options.
-        Fill the form and our sales team will get back to you within 24 hours.
-      </p>
+          {/* Left Content */}
+          <div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Distributors & Bulk Buyers
+            </h2>
 
-      <ul className="text-gray-700 space-y-2">
-        <li>• Minimum order: 10kg</li>
-        <li>• Custom packaging available</li>
-        <li>• Export-ready consignments</li>
-      </ul>
-    </div>
+            <p className="text-gray-600 mb-4">
+              We supply bulk quantities with private-labeling options.
+              Fill the form and our sales team will get back to you within 24 hours.
+            </p>
 
-    {/* Enquiry Form */}
-    <div className="border rounded-lg p-6 shadow-sm">
-      <form className="space-y-4">
-        <input
-          type="text"
-          placeholder="Name"
-          className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-green-600"
-        />
+            <ul className="text-gray-700 space-y-2">
+              <li>• Minimum order: 10kg</li>
+              <li>• Custom packaging available</li>
+              <li>• Export-ready consignments</li>
+            </ul>
+          </div>
 
-        <input
-          type="text"
-          placeholder="Company"
-          className="w-full border px-4 py-2 rounded-md"
-        />
+          {/* Enquiry Form */}
+          <div className="border rounded-lg p-6 shadow-sm">
+            <form className="space-y-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={enquiry.name}
+                onChange={handleChange}
+                className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-green-600"
+              />
 
-        <input
-          type="text"
-          placeholder="City"
-          className="w-full border px-4 py-2 rounded-md"
-        />
+              <input
+                type="text"
+                 name="company"
+                placeholder="Company"
+                value={enquiry.company}
+                onChange={handleChange}
+                className="w-full border px-4 py-2 rounded-md"
+              />
 
-        <input
-          type="number"
-          placeholder="Order Volume (kg)"
-          className="w-full border px-4 py-2 rounded-md"
-        />
+              <input
+                type="text"
+                name="city"
+                placeholder="City"
+                value={enquiry.city}
+                onChange={handleChange}
+                className="w-full border px-4 py-2 rounded-md"
+              />
 
-        <input
-          type="tel"
-          placeholder="Mobile"
-          className="w-full border px-4 py-2 rounded-md"
-        />
+              <input
+                type="number"
+                name="volume"
+                placeholder="Order Volume (kg)"
+                value={enquiry.volume}
+                onChange={handleChange}
+                className="w-full border px-4 py-2 rounded-md"
+              />
 
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full border px-4 py-2 rounded-md"
-        />
+              <input
+                type="tel"
+                name="mobile"
+                placeholder="Mobile"
+                value={enquiry.mobile}
+                onChange={handleChange}
+                className="w-full border px-4 py-2 rounded-md"
+              />
 
-        <button
-          type="button"
-          className="w-full bg-orange-500 text-white py-3 rounded-md hover:bg-orange-600 transition"
-        >
-          Submit Enquiry
-        </button>
-      </form>
-    </div>
-  </div>
-</section>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={enquiry.email}
+                onChange={handleChange}
+                className="w-full border px-4 py-2 rounded-md"
+              />
+
+              <button
+                type="button"
+                onClick={handleEnquirySubmit}
+                className="w-full bg-orange-500 text-white py-3 rounded-md hover:bg-orange-600 transition"
+              >
+                Submit Enquiry
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
 
     </div>
   )

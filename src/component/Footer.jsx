@@ -30,8 +30,9 @@ export default function Footer() {
           <h4 className="text-white font-semibold mb-3">Contact</h4>
           <ul className="space-y-2 text-sm">
             <li>📍 Bihar, India</li>
-            <li>Phone: +91 98765 43210</li>
-            <li>Email: sales@hssmfoods.com</li>
+            <li>Phone: +91 98714 37317</li>
+            <li>Email: contact@veenuts.in</li>
+            <li>Website: www.veenuts.com</li>
           </ul>
         </div>
 
