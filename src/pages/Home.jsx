@@ -1,15 +1,40 @@
 import ProductCard from "../component/ProductCard"
 
 const products = [
-  { id: 1, name: "Classic Makhana", price: 5.99, image: "/assets/m1.jpg" },
-  { id: 2, name: "Spicy Makhana", price: 6.99, image: "/assets/m2.jpg" },
-  { id: 3, name: "Cheese Makhana", price: 7.99, image: "/assets/m3.jpg" },
-  { id: 4, name: "Caramel Makhana", price: 8.99, image: "/assets/m4.jpg" },
+  {
+    id: 1,
+    name: "Roasted Peri-Peri Makhana",
+    price: 120,
+    weight: "70g",
+    image: "/assets/m1.jpg",
+  },
+  {
+    id: 2,
+    name: "Himalayan Pink Salt",
+    price: 130,
+    weight: "70g",
+    image: "/assets/m2.jpg",
+  },
+  {
+    id: 3,
+    name: "Cream & Onion",
+    price: 125,
+    weight: "70g",
+    image: "/assets/m3.jpg",
+  },
+  {
+    id: 4,
+    name: "Raw White Makhana (Bulk)",
+    price: 750,
+    weight: "1kg",
+    image: "/assets/m4.jpg",
+  },
 ]
 
 export default function Home() {
   return (
     <div>
+      {/* Hero Section */}
       <section className="bg-green-50 py-16">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-green-800">
@@ -20,17 +45,150 @@ export default function Home() {
             Fresh, crunchy and nutritious makhana sourced directly from farmers.
           </p>
 
+          <div className="mt-6 flex justify-center gap-4">
+            <button className="bg-green-700 text-white px-6 py-3 rounded-md hover:bg-green-800 transition">
+              Shop Now
+            </button>
+            <button className="border border-green-700 text-green-700 px-6 py-3 rounded-md hover:bg-green-50 transition">
+              Become a Distributor
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">
+            Featured Products
+          </h2>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
-
-          <button className="mt-6 bg-green-700 text-white px-6 py-3 rounded-md hover:bg-green-800 transition">
-            Shop Now
-          </button>
         </div>
       </section>
+
+      {/* Health Benefits */}
+      <section className="bg-gray-50 py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-gray-800 mb-8">
+            Health Benefits
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "High in Protein",
+                desc: "Supports muscle growth and keeps you full longer.",
+              },
+              {
+                title: "Low in Calories",
+                desc: "A guilt-free snack for everyday cravings.",
+              },
+              {
+                title: "Gluten Free",
+                desc: "Safe for gluten-sensitive diets.",
+              },
+              {
+                title: "Low Glycemic Index",
+                desc: "Helps manage blood sugar levels.",
+              },
+              {
+                title: "Vegan Friendly",
+                desc: "Plant-based and suitable for vegan diets.",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="bg-white border rounded-lg p-6 hover:shadow-md transition"
+              >
+                <h3 className="font-semibold text-lg mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      {/* Distributors & Bulk Buyers */}
+      <section className="py-16 bg-white">
+     <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+    
+    {/* Left Content */}
+    <div>
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">
+        Distributors & Bulk Buyers
+      </h2>
+
+      <p className="text-gray-600 mb-4">
+        We supply bulk quantities with private-labeling options.
+        Fill the form and our sales team will get back to you within 24 hours.
+      </p>
+
+      <ul className="text-gray-700 space-y-2">
+        <li>• Minimum order: 10kg</li>
+        <li>• Custom packaging available</li>
+        <li>• Export-ready consignments</li>
+      </ul>
+    </div>
+
+    {/* Enquiry Form */}
+    <div className="border rounded-lg p-6 shadow-sm">
+      <form className="space-y-4">
+        <input
+          type="text"
+          placeholder="Name"
+          className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-green-600"
+        />
+
+        <input
+          type="text"
+          placeholder="Company"
+          className="w-full border px-4 py-2 rounded-md"
+        />
+
+        <input
+          type="text"
+          placeholder="City"
+          className="w-full border px-4 py-2 rounded-md"
+        />
+
+        <input
+          type="number"
+          placeholder="Order Volume (kg)"
+          className="w-full border px-4 py-2 rounded-md"
+        />
+
+        <input
+          type="tel"
+          placeholder="Mobile"
+          className="w-full border px-4 py-2 rounded-md"
+        />
+
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full border px-4 py-2 rounded-md"
+        />
+
+        <button
+          type="button"
+          className="w-full bg-orange-500 text-white py-3 rounded-md hover:bg-orange-600 transition"
+        >
+          Submit Enquiry
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
     </div>
   )
 }
