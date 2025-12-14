@@ -9,6 +9,7 @@ import Layout from "./component/Layout"
 
 function App() {
   return (
+    <div className="pt-18">
     <Layout>
     <Routes>
       <Route path="/" element={<Home />} />
@@ -19,6 +20,7 @@ function App() {
       <Route path="/contact" element={<Contact />} />
     </Routes>
     </Layout>
+    </div>
   )
 }
 

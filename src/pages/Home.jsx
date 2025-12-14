@@ -36,6 +36,7 @@ export default function Home() {
   const heroRef = useRef(null)
   const productsRef = useRef(null)
   const enquiryRef = useRef(null)
+  const storyRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +47,8 @@ export default function Home() {
         scrollPos >= enquiryRef.current.offsetTop
       ) {
         window.dispatchEvent(new CustomEvent("sectionChange", { detail: "enquiry" }))
+      } else if (storyRef.current && scrollPos >= storyRef.current.offsetTop) {
+        window.dispatchEvent(new CustomEvent("sectionChange", { detail: "about" }))
       } else if (
         productsRef.current &&
         scrollPos >= productsRef.current.offsetTop
@@ -58,6 +61,30 @@ export default function Home() {
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const handleScrollToSection = (e) => {
+      const offset = -100
+      let ref = null
+
+      if (e.detail === "about") ref = storyRef
+      if (e.detail === "enquiry") ref = enquiryRef
+      if (e.detail === "products") ref = productsRef
+
+      if (ref?.current) {
+        const y =
+          ref.current.getBoundingClientRect().top +
+          window.pageYOffset +
+          offset
+
+        window.scrollTo({ top: y, behavior: "smooth" })
+      }
+    }
+
+    window.addEventListener("scrollToSection", handleScrollToSection)
+    return () =>
+      window.removeEventListener("scrollToSection", handleScrollToSection)
   }, [])
 
 
@@ -82,23 +109,33 @@ export default function Home() {
     mobile: "",
     email: "",
   })
-  const handleEnquirySubmit = () => {
-    const message = `
+
+  const handleEnquirySubmit = (e) => {
+  e.preventDefault()
+
+  const { name, company, city, volume, mobile, email } = enquiry
+
+  if (!name || !company || !city || !volume || !mobile || !email) {
+    alert("Please fill all fields before submitting.")
+    return
+  }
+
+  const message = `
 Bulk Enquiry:
-Name: ${enquiry.name}
-Company: ${enquiry.company}
-City: ${enquiry.city}
-Order Volume: ${enquiry.volume} kg
-Mobile: ${enquiry.mobile}
-Email: ${enquiry.email}
+Name: ${name}
+Company: ${company}
+City: ${city}
+Order Volume: ${volume}
+Mobile: ${mobile}
+Email: ${email}
   `
 
-    const whatsappURL = `https://wa.me/919871437317?text=${encodeURIComponent(
-      message
-    )}`
+  const whatsappURL = `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(
+    message
+  )}`
 
-    window.open(whatsappURL, "_blank")
-  }
+  window.open(whatsappURL, "_blank")
+}
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -144,9 +181,9 @@ Email: ${enquiry.email}
       </section>
 
       {/* our story */}
-      <section className="py-16 bg-gradient-to-b from-gray-100 to-white">
+      <section ref={storyRef} className="py-16 bg-gradient-to-b from-gray-100 to-white ">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
-             {/* Image / Placeholder */}
+          {/* Image / Placeholder */}
           <div
             className="h-72 rounded-xl overflow-hidden
              bg-cover bg-center bg-no-repeat
@@ -201,7 +238,7 @@ Email: ${enquiry.email}
               </div>
             </div>
           </div>
-          
+
 
 
         </div>
@@ -272,7 +309,7 @@ Email: ${enquiry.email}
       </section>
 
       {/* Distributors & Bulk Buyers */}
-      <section ref={enquiryRef} className="py-16 bg-gradient-to-br from-orange-100  to-orange-50">
+      <section ref={enquiryRef} className="py-16 bg-gradient-to-br from-orange-50  to-orange-50">
 
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
 
@@ -295,65 +332,72 @@ Email: ${enquiry.email}
           </div>
 
           {/* Enquiry Form */}
-          <div className="border rounded-lg p-6 shadow-sm">
-            <form className="space-y-4">
+          <div className="border border-gray-300 rounded-xl p-6 bg-white 
+           hover:shadow-md transition shadow-lg shadow-black/20">
+            <form onSubmit={handleEnquirySubmit} className="space-y-4 ">
               <input
                 type="text"
                 name="name"
                 placeholder="Name"
                 value={enquiry.name}
                 onChange={handleChange}
-                className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-green-600"
+                className="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:ring-1
+                 focus:ring-green-600 "
               />
 
               <input
                 type="text"
                 name="company"
+                required
                 placeholder="Company"
                 value={enquiry.company}
                 onChange={handleChange}
-                className="w-full border px-4 py-2 rounded-md"
+                className="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:ring-green-600 focus:ring-1"
               />
 
               <input
                 type="text"
                 name="city"
+                required
                 placeholder="City"
                 value={enquiry.city}
                 onChange={handleChange}
-                className="w-full border px-4 py-2 rounded-md"
+                className="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:ring-green-600 focus:ring-1"
               />
 
               <input
                 type="number"
                 name="volume"
+                required
                 placeholder="Order Volume (kg)"
                 value={enquiry.volume}
                 onChange={handleChange}
-                className="w-full border px-4 py-2 rounded-md"
+                className="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:ring-green-600 focus:ring-1"
               />
 
               <input
                 type="tel"
                 name="mobile"
+                required
                 placeholder="Mobile"
                 value={enquiry.mobile}
                 onChange={handleChange}
-                className="w-full border px-4 py-2 rounded-md"
+                className="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:ring-green-600 focus:ring-1"
               />
 
               <input
                 type="email"
                 name="email"
+                required
                 placeholder="Email"
                 value={enquiry.email}
                 onChange={handleChange}
-                className="w-full border px-4 py-2 rounded-md"
+                className="w-full border border-gray-400 px-4 py-2 rounded-md focus:outline-none focus:ring-green-600 focus:ring-1"
               />
 
               <button
-                type="button"
-                onClick={handleEnquirySubmit}
+                type="submit"
+                
                 className="w-full bg-orange-500 text-white py-3 rounded-md hover:bg-orange-600 transition"
               >
                 Submit Enquiry
