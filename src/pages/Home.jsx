@@ -1,5 +1,5 @@
 import ProductCard from "../component/ProductCard"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 
 const products = [
   {
@@ -33,6 +33,47 @@ const products = [
 ]
 
 export default function Home() {
+  const heroRef = useRef(null)
+  const productsRef = useRef(null)
+  const enquiryRef = useRef(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + 120
+
+      if (
+        enquiryRef.current &&
+        scrollPos >= enquiryRef.current.offsetTop
+      ) {
+        window.dispatchEvent(new CustomEvent("sectionChange", { detail: "enquiry" }))
+      } else if (
+        productsRef.current &&
+        scrollPos >= productsRef.current.offsetTop
+      ) {
+        window.dispatchEvent(new CustomEvent("sectionChange", { detail: "products" }))
+      } else {
+        window.dispatchEvent(new CustomEvent("sectionChange", { detail: "home" }))
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+
+  const handleShopNowClick = () => {
+    if (productsRef.current) {
+      const yOffset = -100 // navbar height offset
+      const y =
+        productsRef.current.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset
+
+      window.scrollTo({ top: y, behavior: "smooth" })
+    }
+  }
+
+
   const [enquiry, setEnquiry] = useState({
     name: "",
     company: "",
@@ -60,39 +101,116 @@ Email: ${enquiry.email}
   }
 
   const handleChange = (e) => {
-  const { name, value } = e.target
-  setEnquiry((prev) => ({
-    ...prev,
-    [name]: value,
-  }))
-}
+    const { name, value } = e.target
+    setEnquiry((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
 
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-green-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-green-800">
+      <section
+        ref={heroRef}
+        className="relative min-h-[85vh]  flex items-center bg-cover bg-center "
+        style={{ backgroundImage: "url('/makhana bowl.webp')" }}
+      >
+
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-white/20 backdrop-blur-[2px]"></div>
+
+        <div className="relative max-w-7xl mx-auto px-4 text-center ">
+          <h1 className="text-4xl md:text-5xl font-bold">
             Premium Makhana for Healthy Living
           </h1>
 
-          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+          <p className="mt-4 text-gray-700 max-w-2xl mx-auto">
             Fresh, crunchy and nutritious makhana sourced directly from farmers.
           </p>
 
           <div className="mt-6 flex justify-center gap-4">
-            <button className="bg-green-700 text-white px-6 py-3 rounded-md hover:bg-green-800 transition">
+            <button
+              onClick={handleShopNowClick}
+              className="bg-green-700 text-white px-6 py-3 rounded-md hover:bg-green-800 transition">
               Shop Now
             </button>
-            <button className="border border-green-700 text-green-700 px-6 py-3 rounded-md hover:bg-green-50 transition">
+            <button className="bg-green-700 text-white border border-green-700 px-6 py-3 rounded-md hover:bg-green-800 transition">
               Become a Distributor
             </button>
           </div>
         </div>
       </section>
 
+      {/* our story */}
+      <section className="py-16 bg-gradient-to-b from-gray-100 to-white">
+        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+             {/* Image / Placeholder */}
+          <div
+            className="h-72 rounded-xl overflow-hidden
+             bg-cover bg-center bg-no-repeat
+             border border-gray-400
+             shadow-xl shadow-black/30"
+            style={{ backgroundImage: "url('/makhana process.jpg')" }}
+          >
+          </div>
+          {/* Content */}
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              Our Story
+            </h2>
+
+            <p className="text-gray-600 leading-relaxed mb-6">
+              HSSM FOODS PRIVATE LIMITED sources handpicked makhana from trusted
+              farmers in Bihar and processes them in hygienic facilities to deliver
+              crunchy, nutritious snacks to customers across India and abroad.
+            </p>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex items-start gap-3">
+                <span className="bg-orange-100 text-green-700 p-2 rounded-md">✔</span>
+                <div>
+                  <p className="font-medium">100% Natural</p>
+                  <p className="text-sm text-gray-500">No preservatives</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <span className="bg-green-100 text-green-700 p-2 rounded-md">🏭</span>
+                <div>
+                  <p className="font-medium">Hygienic Processing</p>
+                  <p className="text-sm text-gray-500">Modern facilities</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <span className="bg-green-100 text-green-700 p-2 rounded-md">🌱</span>
+                <div>
+                  <p className="font-medium">Sustainably Sourced</p>
+                  <p className="text-sm text-gray-500">Support local farmers</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <span className="bg-orange-100 text-green-700 p-2 rounded-md">🧪</span>
+                <div>
+                  <p className="font-medium">Lab Tested</p>
+                  <p className="text-sm text-gray-500">Quality assured</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+
+        </div>
+      </section>
+
+
       {/* Featured Products */}
-      <section className="py-16">
+      <section ref={productsRef} className="py-16 ">
+
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">
             Featured Products
@@ -107,7 +225,8 @@ Email: ${enquiry.email}
       </section>
 
       {/* Health Benefits */}
-      <section className="bg-gray-50 py-16">
+      <section className="py-16 bg-gradient-to-b from-white via-gray-50 to-white">
+
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl font-bold text-gray-800 mb-8">
             Health Benefits
@@ -138,7 +257,7 @@ Email: ${enquiry.email}
             ].map((item, index) => (
               <div
                 key={index}
-                className="bg-white border rounded-lg p-6 hover:shadow-md transition"
+                className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-md transition shadow-lg shadow-black/10"
               >
                 <h3 className="font-semibold text-lg mb-2">
                   {item.title}
@@ -153,7 +272,8 @@ Email: ${enquiry.email}
       </section>
 
       {/* Distributors & Bulk Buyers */}
-      <section className="py-16 bg-white">
+      <section ref={enquiryRef} className="py-16 bg-gradient-to-br from-orange-100  to-orange-50">
+
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
 
           {/* Left Content */}
@@ -188,7 +308,7 @@ Email: ${enquiry.email}
 
               <input
                 type="text"
-                 name="company"
+                name="company"
                 placeholder="Company"
                 value={enquiry.company}
                 onChange={handleChange}

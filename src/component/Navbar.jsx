@@ -1,88 +1,156 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { useCart } from "../context/CartContext"
 
 export default function Navbar() {
-    const [open, setOpen] = useState(false)
-    const { cartItems } = useCart()
+  const [activeSection, setActiveSection] = useState("home")
+  const [open, setOpen] = useState(false)
+  const { cartItems } = useCart()
+  const [scrolled, setScrolled] = useState(false)
 
+  // scroll background change
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
-    return (
-        <nav className="bg-white shadow-md px-4 py-3 sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto flex justify-between items-center">
-                {/* Logo */}
-                <Link to="/" className="text-xl font-bold text-green-700">
-                    HSSM FOODS
-                </Link>
+  // listen to section changes
+  useEffect(() => {
+    const handler = (e) => setActiveSection(e.detail)
+    window.addEventListener("sectionChange", handler)
+    return () => window.removeEventListener("sectionChange", handler)
+  }, [])
 
-                {/* Desktop Menu */}
-                <div className="hidden md:flex gap-8 text-gray-700 font-medium">
+  return (
+    <nav
+      className={`fixed top-0 w-full z-50 px-6 py-4 transition-all duration-300
+        ${
+          scrolled
+            ? "bg-white border-b border-gray-200"
+            : "bg-white/70 backdrop-blur-sm"
+        }`}
+    >
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        {/* Logo */}
+        <Link
+          to="/"
+          className="text-lg font-semibold text-green-700 tracking-wide"
+        >
+          HSSM FOODS
+        </Link>
 
-                    <Link to="/" className="hover:text-green-600 transition">Home</Link>
-                    <Link to="/products" className="hover:text-green-600 transition">Products</Link>
-                    <Link
-                        to="/cart"
-                        className="relative hover:text-green-600 transition flex items-center gap-1"
-                    >
-                        <span>🛒</span>
-                        <span>Cart ({cartItems.length})</span>
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-8 font-medium">
+          {/* Home */}
+          <Link
+            to="/"
+            className={`flex items-center h-10 transition ${
+              activeSection === "home"
+                ? "text-green-700 font-semibold"
+                : "text-gray-700 hover:text-green-700"
+            }`}
+          >
+            Home
+          </Link>
 
-                        {/* Cart Count */}
-                        <span className="absolute -top-2 -right-3 bg-green-600 text-white text-xs rounded-full px-1.5">
-                            {cartItems.length}
-                        </span>
-                    </Link>
-                    <a
-                        href="https://wa.me/919871437317?text=Hi%2C%20I%20am%20interested%20in%20your%20makhana%20products."
-                        target="_blank"
-                        rel="noreferrer"
-                        className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
-                    >
-                        WhatsApp
-                    </a>
+          {/* Products (same page section) */}
+          <span
+            className={`flex items-center h-10 cursor-pointer transition ${
+              activeSection === "products"
+                ? "text-green-700 font-semibold"
+                : "text-gray-700 hover:text-green-700"
+            }`}
+          >
+            Products
+          </span>
 
+          {/* Cart */}
+          <Link
+            to="/cart"
+            className="relative flex items-center gap-1 h-10 text-gray-700 hover:text-green-700 transition "
+          >
+            <span>🛒</span>
+            <span>Cart ({cartItems.length})</span>
 
-                </div>
-
-                {/* Mobile Menu Button */}
-                <button
-                    className="md:hidden"
-                    onClick={() => setOpen(!open)}
-                >
-                    ☰
-                </button>
-            </div>
-
-            {/* Mobile Menu */}
-            {open && (
-                <div className="md:hidden mt-3 bg-white border-t flex flex-col gap-4 px-4 py-4 shadow-sm">
-
-                    <Link to="/" onClick={() => setOpen(false)}>
-                        Home
-                    </Link>
-
-                    <Link to="/products" onClick={() => setOpen(false)}>
-                        Products
-                    </Link>
-
-                    <Link to="/cart" onClick={() => setOpen(false)}>
-                        Cart ({cartItems.length})
-                    </Link>
-
-                    {/* WhatsApp Button */}
-                    <a
-                        href="https://wa.me/919871437317?text=Hi%2C%20I%20am%20interested%20in%20your%20makhana%20products."
-                        target="_blank"
-                        rel="noreferrer"
-                        className="bg-green-600 text-white px-4 py-2 rounded-md text-center"
-                        onClick={() => setOpen(false)}
-                    >
-                        WhatsApp
-                    </a>
-
-                </div>
+            {cartItems.length > 0 && (
+              <span className="absolute -top-2 -right-3 bg-green-600 text-white text-xs rounded-full px-1.5">
+                {cartItems.length}
+              </span>
             )}
+          </Link>
 
-        </nav>
-    )
+          {/* WhatsApp */}
+          <a
+            href="https://wa.me/919871437317?text=Hi%2C%20I%20am%20interested%20in%20your%20makhana%20products."
+            target="_blank"
+            rel="noreferrer"
+            className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
+          >
+            WhatsApp
+          </a>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-2xl text-gray-700"
+          onClick={() => setOpen(!open)}
+        >
+          ☰
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {open && (
+        <div className="md:hidden mt-3 bg-white border-t flex flex-col gap-4 px-4 py-4 shadow-sm">
+          {/* Home */}
+          <Link
+            to="/"
+            onClick={() => setOpen(false)}
+            className={
+              activeSection === "home"
+                ? "text-green-700 font-semibold"
+                : "text-gray-700"
+            }
+          >
+            Home
+          </Link>
+
+          {/* Products */}
+          <span
+            onClick={() => setOpen(false)}
+            className={
+              activeSection === "products"
+                ? "text-green-700 font-semibold cursor-pointer"
+                : "text-gray-700 cursor-pointer"
+            }
+          >
+            Products
+          </span>
+
+          {/* Cart */}
+          <Link
+            to="/cart"
+            onClick={() => setOpen(false)}
+            className="text-gray-700"
+          >
+            Cart ({cartItems.length})
+          </Link>
+
+          {/* WhatsApp */}
+          <a
+            href="https://wa.me/919871437317?text=Hi%2C%20I%20am%20interested%20in%20your%20makhana%20products."
+            target="_blank"
+            rel="noreferrer"
+            className="bg-green-600 text-white px-4 py-2 rounded-md text-center"
+            onClick={() => setOpen(false)}
+          >
+            WhatsApp
+          </a>
+        </div>
+      )}
+    </nav>
+  )
 }
