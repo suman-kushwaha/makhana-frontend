@@ -1,5 +1,6 @@
 import ProductCard from "../component/ProductCard"
 import { useState, useRef, useEffect } from "react"
+import { Leaf, Flame, Package, TestTube } from 'lucide-react'
 
 const products = [
   {
@@ -130,7 +131,8 @@ Mobile: ${mobile}
 Email: ${email}
   `
 
-  const whatsappURL = `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(
+  const whatsappURL = `https://wa.me/919871437317+
+  +?ext=${encodeURIComponent(
     message
   )}`
 
@@ -208,6 +210,7 @@ Email: ${email}
               <div className="flex items-start gap-3">
                 <span className="bg-orange-100 text-green-700 p-2 rounded-md">✔</span>
                 <div>
+                  <Leaf className="text-green-600 mb-2" />
                   <p className="font-medium">100% Natural</p>
                   <p className="text-sm text-gray-500">No preservatives</p>
                 </div>
@@ -216,6 +219,7 @@ Email: ${email}
               <div className="flex items-start gap-3">
                 <span className="bg-green-100 text-green-700 p-2 rounded-md">🏭</span>
                 <div>
+                  <Package  className="text-orange-600 mb-2" />
                   <p className="font-medium">Hygienic Processing</p>
                   <p className="text-sm text-gray-500">Modern facilities</p>
                 </div>
@@ -224,6 +228,7 @@ Email: ${email}
               <div className="flex items-start gap-3">
                 <span className="bg-green-100 text-green-700 p-2 rounded-md">🌱</span>
                 <div>
+                  
                   <p className="font-medium">Sustainably Sourced</p>
                   <p className="text-sm text-gray-500">Support local farmers</p>
                 </div>
@@ -232,6 +237,7 @@ Email: ${email}
               <div className="flex items-start gap-3">
                 <span className="bg-orange-100 text-green-700 p-2 rounded-md">🧪</span>
                 <div>
+                  
                   <p className="font-medium">Lab Tested</p>
                   <p className="text-sm text-gray-500">Quality assured</p>
                 </div>
@@ -272,8 +278,8 @@ Email: ${email}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
               {
-                title: "High in Protein",
-                desc: "Supports muscle growth and keeps you full longer.",
+                title: "High in Protein ⚡",
+                desc: "Supports muscle growth and keeps you full longer.",          
               },
               {
                 title: "Low in Calories",
@@ -284,19 +290,23 @@ Email: ${email}
                 desc: "Safe for gluten-sensitive diets.",
               },
               {
-                title: "Low Glycemic Index",
+                title: "Low Glycemic Index ⚖️",
                 desc: "Helps manage blood sugar levels.",
               },
               {
-                title: "Vegan Friendly",
+                title: "Vegan Friendly 🌿",
                 desc: "Plant-based and suitable for vegan diets.",
+              },
+              {
+                title: "Brain booster 🧠",
+                desc: "High in antioxidants, improve memory",
               },
             ].map((item, index) => (
               <div
                 key={index}
                 className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-md transition shadow-lg shadow-black/10"
               >
-                <h3 className="font-semibold text-lg mb-2">
+                <h3 className="font-bold text-lg mb-2">
                   {item.title}
                 </h3>
                 <p className="text-gray-600 text-sm">
