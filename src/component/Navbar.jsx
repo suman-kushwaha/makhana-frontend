@@ -36,10 +36,16 @@ export default function Navbar() {
                 {/* Logo */}
                 <Link
                     to="/"
-                    className="text-lg font-semibold text-green-700 tracking-wide"
-                >
-                    HSSM FOODS
-                </Link>
+                    className=" flex items-center gap-2 text-lg font-semibold text-green-700 tracking-wide"
+                    ><img
+                       src ="/logo1.jpeg"
+                       
+                       className="h-10 w-auto object-contain"
+                    />
+                   <span className="text-lg font-semibold text-green-700 ">
+                    HSSM FOODs
+                   </span>
+                   </Link>
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-8 font-medium">

@@ -5,30 +5,47 @@ import { Leaf, Flame, Package, TestTube } from 'lucide-react'
 const products = [
   {
     id: 1,
-    name: "Roasted Peri-Peri Makhana",
-    price: 120,
-    weight: "70g",
+    name: "Mixed Raw Makhana",
+    grade:"4-6 Suta",
+    size: "Mixed (Wholesale Grade)",
+    priceRange:"₹1000 - ₹1250 / kg",
+    note :"Last lower price ₹950/kg",
     image: "/assets/m1.jpg",
   },
   {
     id: 2,
-    name: "Himalayan Pink Salt",
-    price: 130,
-    weight: "70g",
+    name: "Raw Makhana",
+    grade:"4 Suta",
+    size: "Regular / Small",
+    priceRange: "₹700 - ₹1000 / kg",
+    note: "Most common, daily use",
     image: "/assets/m2.jpg",
   },
   {
     id: 3,
-    name: "Cream & Onion",
-    price: 125,
-    weight: "70g",
+    name: "Raw Makhana",
+    grade:"5 Suta",
+    size: "Medium / Premium",
+    priceRange: "₹1050 - ₹1300 / kg",
+    note:"Popular for snacking",
     image: "/assets/m3.jpg",
   },
   {
     id: 4,
-    name: "Raw White Makhana (Bulk)",
-    price: 750,
-    weight: "1kg",
+    name: "Large/Premium",
+    grade:"6 Suta",
+    size: "Large / Premium",
+    priceRange: "₹1300 - ₹1500 / kg",
+    note: "Ideal for gifting",
+    image: "/assets/m4.jpg",
+  },
+  {
+    id: 5,
+    name: "Raw Makhana",
+    grade:"7+ Suta",
+    size: "Jumbo / Export Quality",
+    priceRange: "₹1500 - ₹1700 / kg" ,
+    note:"Expor & high-end market",
     image: "/assets/m4.jpg",
   },
 ]
@@ -131,7 +148,7 @@ Mobile: ${mobile}
 Email: ${email}
   `
 
-  const whatsappURL = `https://wa.me/919871437317+
+  const whatsappURL = `https://wa.me/917318892828+
   +?ext=${encodeURIComponent(
     message
   )}`
@@ -175,7 +192,13 @@ Email: ${email}
               className="bg-green-700 text-white px-6 py-3 rounded-md hover:bg-green-800 transition">
               Shop Now
             </button>
-            <button className="bg-green-700 text-white border border-green-700 px-6 py-3 rounded-md hover:bg-green-800 transition">
+            <button 
+            onClick={()=>
+              window.dispatchEvent(
+                new CustomEvent("scrollToSection",{detail:"enquiry"})
+              )
+            }
+            className="bg-green-700 text-white border border-green-700 px-6 py-3 rounded-md hover:bg-green-800 transition">
               Become a Distributor
             </button>
           </div>
@@ -256,7 +279,7 @@ Email: ${email}
 
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">
-            Featured Products
+            Featured Products By Size
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

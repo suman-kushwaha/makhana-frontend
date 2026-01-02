@@ -21,8 +21,22 @@ export default function ProductCard({ product }) {
                 className="w-full h-48 object-cover rounded-md"
             />
             <h3 className="mt-3 font-semibold text-lg">{product.name}</h3>
-            <p className="text-sm text-gray-500">{product.weight}</p>
-            <p className="mt-1 text-green-700 font-bold">${product.price}</p>
+             <p className="text-sm text-gray-600 mt-1">
+             Grade: <span className="font-medium">{product.grade}</span>
+            </p>
+
+            <p className="text-sm text-gray-500">
+            {product.size}
+            </p>
+
+           <p className="text-green-700 font-semibold mt-2">
+             {product.priceRange}
+           </p>
+
+           <p className="text-xs text-gray-400 mt-1">
+             {product.note}
+            </p>
+            
 
             <div className="mt-4 flex gap-3">
                 {isInCart ? (
@@ -42,8 +56,15 @@ export default function ProductCard({ product }) {
                 )}
 
                 <a
-                    href={`https://wa.me/919871437317?text=Hi%2C%20I%20am%20interested%20in%20${encodeURIComponent(
-                        product.name + " (" + product.weight + ")"
+                    href={`https://wa.me/917318892828?text=${encodeURIComponent(
+                        `Hi, I am interested in the following product :\n\n` +
+                        `Product: ${product.name}\n`+
+                        `Grade: ${product.grade}\n`+
+                        `Size:${product.size}\n`+
+                        `Price Range: ${product.priceRange}\n\n`+
+                        
+                        `Please share more details.`
+                        
                     )}`}
                     target="_blank"
                     rel="noreferrer"
