@@ -5,52 +5,88 @@ import { Leaf, Flame, Package, TestTube } from 'lucide-react'
 const products = [
   {
     id: 1,
-    name: "Mixed Raw Makhana",
-    grade:"4-6 Suta",
+    type: "wholesale",
+    name: " Raw Makhana",
+    grade: "4-6 Suta",
     size: "Mixed (Wholesale Grade)",
-    priceRange:"₹1000 - ₹1250 / kg",
-    note :"Last lower price ₹950/kg",
-    image: "/assets/m1.jpg",
+    priceRange: "₹1000 - ₹1250 / kg",
+    note: "Last lower price ₹950/kg",
+    image: "roasted makhana.jpg",
   },
   {
     id: 2,
+    type: "wholesale",
     name: "Raw Makhana",
-    grade:"4 Suta",
+    grade: "4 Suta",
     size: "Regular / Small",
     priceRange: "₹700 - ₹1000 / kg",
     note: "Most common, daily use",
-    image: "/assets/m2.jpg",
+    image: "roasted makhana.jpg",
   },
   {
     id: 3,
+    type: "wholesale",
     name: "Raw Makhana",
-    grade:"5 Suta",
+    grade: "5 Suta",
     size: "Medium / Premium",
     priceRange: "₹1050 - ₹1300 / kg",
-    note:"Popular for snacking",
-    image: "/assets/m3.jpg",
+    note: "Popular for snacking",
+    image: "/roasted makhana.jpg",
   },
   {
     id: 4,
+    type: "wholesale",
     name: "Large/Premium",
-    grade:"6 Suta",
+    grade: "6 Suta",
     size: "Large / Premium",
     priceRange: "₹1300 - ₹1500 / kg",
     note: "Ideal for gifting",
-    image: "/assets/m4.jpg",
+    image: "makhana bowl.webp",
   },
   {
     id: 5,
+    type: "wholesale",
     name: "Raw Makhana",
-    grade:"7+ Suta",
+    grade: "7+ Suta",
     size: "Jumbo / Export Quality",
-    priceRange: "₹1500 - ₹1700 / kg" ,
-    note:"Expor & high-end market",
-    image: "/assets/m4.jpg",
+    priceRange: "₹1500 - ₹1700 / kg",
+    note: "Expor & high-end market",
+    image: "roasted makhana.jpg",
   },
+  {
+    id: 6,
+    type: "retail", // 👈 NEW
+    name: "Roasted Makhana",
+    flavor: "Salted",
+    weight: "250g",
+    price: "₹299",
+    bestseller: true,
+    image: "/pic.jpg",
+  },
+  {
+    id: 7,
+    type: "retail", // 👈 NEW
+    name: "Simple Makhana",
+    flavor: "Plain",
+    weight: "250g",
+    price: "₹249",
+    bestseller: false,
+    image: "/pic.jpg",
+  },
+  {
+    id: 8,
+    type: "retail", // 👈 NEW
+    name: "Peri peri Makhana",
+    flavor: "Peri Peri",
+    weight: "100g",
+    price: "₹120",
+    bestseller: true,
+    image: "/pic.jpg",
+  }
 ]
 
 export default function Home() {
+  const [category, setCategory] = useState("all")
   const heroRef = useRef(null)
   const productsRef = useRef(null)
   const enquiryRef = useRef(null)
@@ -129,16 +165,16 @@ export default function Home() {
   })
 
   const handleEnquirySubmit = (e) => {
-  e.preventDefault()
+    e.preventDefault()
 
-  const { name, company, city, volume, mobile, email } = enquiry
+    const { name, company, city, volume, mobile, email } = enquiry
 
-  if (!name || !company || !city || !volume || !mobile || !email) {
-    alert("Please fill all fields before submitting.")
-    return
-  }
+    if (!name || !company || !city || !volume || !mobile || !email) {
+      alert("Please fill all fields before submitting.")
+      return
+    }
 
-  const message = `
+    const message = `
 Bulk Enquiry:
 Name: ${name}
 Company: ${company}
@@ -148,13 +184,10 @@ Mobile: ${mobile}
 Email: ${email}
   `
 
-  const whatsappURL = `https://wa.me/917318892828+
-  +?ext=${encodeURIComponent(
-    message
-  )}`
+    const whatsappURL = `https://wa.me/917318892828?text=${encodeURIComponent(message)}`
 
-  window.open(whatsappURL, "_blank")
-}
+    window.open(whatsappURL, "_blank")
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -163,7 +196,12 @@ Email: ${email}
       [name]: value,
     }))
   }
+  
 
+    const filteredProducts =
+  category === "all"
+    ? products
+    : products.filter(p => p.type === category)
   return (
     <div>
       {/* Hero Section */}
@@ -192,13 +230,13 @@ Email: ${email}
               className="bg-green-700 text-white px-6 py-3 rounded-md hover:bg-green-800 transition">
               Shop Now
             </button>
-            <button 
-            onClick={()=>
-              window.dispatchEvent(
-                new CustomEvent("scrollToSection",{detail:"enquiry"})
-              )
-            }
-            className="bg-green-700 text-white border border-green-700 px-6 py-3 rounded-md hover:bg-green-800 transition">
+            <button
+              onClick={() =>
+                window.dispatchEvent(
+                  new CustomEvent("scrollToSection", { detail: "enquiry" })
+                )
+              }
+              className="bg-green-700 text-white border border-green-700 px-6 py-3 rounded-md hover:bg-green-800 transition">
               Become a Distributor
             </button>
           </div>
@@ -242,7 +280,7 @@ Email: ${email}
               <div className="flex items-start gap-3">
                 <span className="bg-green-100 text-green-700 p-2 rounded-md">🏭</span>
                 <div>
-                  <Package  className="text-orange-600 mb-2" />
+                  <Package className="text-orange-600 mb-2" />
                   <p className="font-medium">Hygienic Processing</p>
                   <p className="text-sm text-gray-500">Modern facilities</p>
                 </div>
@@ -251,7 +289,7 @@ Email: ${email}
               <div className="flex items-start gap-3">
                 <span className="bg-green-100 text-green-700 p-2 rounded-md">🌱</span>
                 <div>
-                  
+
                   <p className="font-medium">Sustainably Sourced</p>
                   <p className="text-sm text-gray-500">Support local farmers</p>
                 </div>
@@ -260,7 +298,7 @@ Email: ${email}
               <div className="flex items-start gap-3">
                 <span className="bg-orange-100 text-green-700 p-2 rounded-md">🧪</span>
                 <div>
-                  
+
                   <p className="font-medium">Lab Tested</p>
                   <p className="text-sm text-gray-500">Quality assured</p>
                 </div>
@@ -275,6 +313,29 @@ Email: ${email}
 
 
       {/* Featured Products */}
+      <div className="flex gap-4 mb-6 justify-center">
+  <button 
+    onClick={() => setCategory("all")}
+    className="px-4 py-2 bg-gray-200 rounded-md"
+  >
+    All
+  </button>
+
+  <button 
+    onClick={() => setCategory("wholesale")}
+    className="px-4 py-2 bg-green-600 text-white rounded-md"
+  >
+    Wholesale
+  </button>
+
+  <button 
+    onClick={() => setCategory("retail")}
+    className="px-4 py-2 bg-orange-500 text-white rounded-md"
+  >
+    Retail Packets
+  </button>
+</div>
+
       <section ref={productsRef} className="py-16 ">
 
         <div className="max-w-7xl mx-auto px-4">
@@ -283,7 +344,7 @@ Email: ${email}
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.map(product => (
+            {filteredProducts.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
@@ -302,7 +363,7 @@ Email: ${email}
             {[
               {
                 title: "High in Protein ⚡",
-                desc: "Supports muscle growth and keeps you full longer.",          
+                desc: "Supports muscle growth and keeps you full longer.",
               },
               {
                 title: "Low in Calories",
@@ -430,7 +491,7 @@ Email: ${email}
 
               <button
                 type="submit"
-                
+
                 className="w-full bg-orange-500 text-white py-3 rounded-md hover:bg-orange-600 transition"
               >
                 Submit Enquiry
@@ -443,3 +504,4 @@ Email: ${email}
     </div>
   )
 }
+

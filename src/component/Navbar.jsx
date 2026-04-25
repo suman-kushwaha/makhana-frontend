@@ -42,9 +42,10 @@ export default function Navbar() {
                        
                        className="h-10 w-auto object-contain"
                     />
-                   <span className="text-lg font-semibold text-green-700 ">
-                    HSSM FOODs
+                   <span className="text-lg font-semibold text-green-700  ">
+                    HSSM FOODS
                    </span>
+                   
                    </Link>
 
                 {/* Desktop Menu */}
