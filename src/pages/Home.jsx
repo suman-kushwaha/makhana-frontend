@@ -11,7 +11,7 @@ const products = [
     size: "Mixed (Wholesale Grade)",
     priceRange: "₹1000 - ₹1250 / kg",
     note: "Last lower price ₹950/kg",
-    image: "roasted makhana.jpg",
+    image: "/makhana-bowl.png",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const products = [
     size: "Regular / Small",
     priceRange: "₹700 - ₹1000 / kg",
     note: "Most common, daily use",
-    image: "roasted makhana.jpg",
+    image: "/makhana-bowl.png",
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const products = [
     size: "Medium / Premium",
     priceRange: "₹1050 - ₹1300 / kg",
     note: "Popular for snacking",
-    image: "/roasted makhana.jpg",
+    image: "/makhana-bowl.png",
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const products = [
     size: "Large / Premium",
     priceRange: "₹1300 - ₹1500 / kg",
     note: "Ideal for gifting",
-    image: "makhana bowl.webp",
+    image: "/makhana-bowl.png",
   },
   {
     id: 5,
@@ -51,7 +51,7 @@ const products = [
     size: "Jumbo / Export Quality",
     priceRange: "₹1500 - ₹1700 / kg",
     note: "Expor & high-end market",
-    image: "roasted makhana.jpg",
+    image: "/makhana-bowl.png",
   },
   {
     id: 6,
@@ -61,27 +61,27 @@ const products = [
     weight: "250g",
     price: "₹299",
     bestseller: true,
-    image: "/pic.jpg",
+    image: "/packaging.png",
   },
   {
     id: 7,
     type: "retail", // 👈 NEW
-    name: "Simple Makhana",
-    flavor: "Plain",
+    name: "Caramel Makhana",
+    flavor: "Caramel",
     weight: "250g",
     price: "₹249",
     bestseller: false,
-    image: "/pic.jpg",
+    image: "/packaging.png",
   },
   {
     id: 8,
     type: "retail", // 👈 NEW
-    name: "Peri peri Makhana",
+    name: "Peri Peri Roasted Makhana",
     flavor: "Peri Peri",
     weight: "100g",
     price: "₹120",
     bestseller: true,
-    image: "/pic.jpg",
+    image: "/packaging.png",
   }
 ]
 
@@ -184,7 +184,7 @@ Mobile: ${mobile}
 Email: ${email}
   `
 
-    const whatsappURL = `https://wa.me/917318892828?text=${encodeURIComponent(message)}`
+    const whatsappURL = `https://wa.me/919871437317?text=${encodeURIComponent(message)}`
 
     window.open(whatsappURL, "_blank")
   }
@@ -196,19 +196,21 @@ Email: ${email}
       [name]: value,
     }))
   }
-  
 
-    const filteredProducts =
-  category === "all"
-    ? products
-    : products.filter(p => p.type === category)
+
+  const filteredProducts =
+    category === "all"
+      ? products
+      : products.filter(p => p.type === category)
+
+
   return (
     <div>
       {/* Hero Section */}
       <section
         ref={heroRef}
         className="relative min-h-[85vh]  flex items-center bg-cover bg-center "
-        style={{ backgroundImage: "url('/makhana bowl.webp')" }}
+        style={{ backgroundImage: "url('/makhana-bowl1.webp')" }}
       >
 
 
@@ -314,27 +316,33 @@ Email: ${email}
 
       {/* Featured Products */}
       <div className="flex gap-4 mb-6 justify-center">
-  <button 
-    onClick={() => setCategory("all")}
-    className="px-4 py-2 bg-gray-200 rounded-md"
-  >
-    All
-  </button>
+        <button
+          onClick={() => setCategory("all")}
+          className="px-4 py-2 bg-orange-500 text-white rounded-md 
+    hover:-translate-y-1 hover:shadow-md 
+    transition-all duration-300"
+        >
+          All
+        </button>
 
-  <button 
-    onClick={() => setCategory("wholesale")}
-    className="px-4 py-2 bg-green-600 text-white rounded-md"
-  >
-    Wholesale
-  </button>
+        <button
+          onClick={() => setCategory("wholesale")}
+          className="px-4 py-2 bg-green-600 text-white rounded-md 
+    hover:-translate-y-1 hover:shadow-md 
+    transition-all duration-300"
+        >
+          Wholesale
+        </button>
 
-  <button 
-    onClick={() => setCategory("retail")}
-    className="px-4 py-2 bg-orange-500 text-white rounded-md"
-  >
-    Retail Packets
-  </button>
-</div>
+        <button
+          onClick={() => setCategory("retail")}
+          className="px-4 py-2 bg-orange-500 text-white rounded-md 
+    hover:-translate-y-1 hover:shadow-md 
+    transition-all duration-300"
+        >
+          Retail Packets
+        </button>
+      </div>
 
       <section ref={productsRef} className="py-16 ">
 

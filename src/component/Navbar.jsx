@@ -38,7 +38,7 @@ export default function Navbar() {
                     to="/"
                     className=" flex items-center gap-2 text-lg font-semibold text-green-700 tracking-wide"
                     ><img
-                       src ="/logo1.jpeg"
+                       src ="/logo.jpeg"
                        
                        className="h-10 w-auto object-contain"
                     />

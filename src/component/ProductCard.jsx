@@ -20,7 +20,7 @@ export default function ProductCard({ product }) {
                 <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-48 object-cover rounded-md"
+                    className="w-full h-auto object-contain rounded-md"
                 />
 
                 {product.type === "retail" && product.bestseller && (
@@ -96,7 +96,7 @@ export default function ProductCard({ product }) {
                         )}
 
                         <a
-                            href={`https://wa.me/917318892828?text=${encodeURIComponent(
+                            href={`https://wa.me/919871437317?text=${encodeURIComponent(
                                 `Hi, I am interested in:\n\n` +
                                 `Product: ${product.name}\n` +
                                 `Grade: ${product.grade}\n` +
@@ -113,7 +113,7 @@ export default function ProductCard({ product }) {
                     </>
                 ) : (
                     <a
-                        href={`https://wa.me/917318892828?text=${encodeURIComponent(
+                        href={`https://wa.me/919871437317?text=${encodeURIComponent(
                             `Hi, I want to order:\n\n` +
                             `Product: ${product.name}\n` +
                             `Weight: ${product.weight}\n` +
