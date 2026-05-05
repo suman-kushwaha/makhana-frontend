@@ -268,6 +268,11 @@ Email: ${email}
               HSSM FOODS PRIVATE LIMITED sources handpicked makhana from trusted
               farmers in Bihar and processes them in hygienic facilities to deliver
               crunchy, nutritious snacks to customers across India and abroad.
+              Veenuts is a health-focused snacking brand under HSSM Eterprises, dedicated
+              to offering premium quality makhana(foxnuts).We are committed to creating calue for farmers,
+              consumers and retailers by transforming traditional indian superfoods into modern,
+              guilt-free snacks.
+            
             </p>
 
             <div className="grid grid-cols-2 gap-4">
@@ -386,46 +391,43 @@ Email: ${email}
           ></path>
         </svg>
       </div>
+<section className="px-6 md:px-16 py-16 bg-white">
+  <div className="max-w-5xl mx-auto text-center">
 
-      <section className="px-6 md:px-16 py-16 bg-gradient-to-b from-white to-green-50">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    {/* HEADING */}
+    <h2 className="text-3xl md:text-4xl font-semibold text-green-700 tracking-tight mb-4">
+      What We Do
+    </h2>
 
-          {/* LEFT CONTENT */}
-          <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-semibold text-green-700 tracking-tight">
-              What We Do
-              <span className="block w-16 h-1 bg-green-600 mt-2 rounded"></span>
-            </h2>
+    <p className="text-gray-600 mb-10">
+      At HSSM FOODS PRIVATE LIMITED, we deliver premium makhana products from farm to table, focusing on quality, hygiene, and taste.
+    </p>
 
-            <p className="text-gray-700 leading-relaxed">
-              At HSSM FOODS PRIVATE LIMITED, we are dedicated to delivering the finest quality makhana products from farm to table.
-              Our focus is on purity, taste, and health, ensuring our customers get premium snacks packed with nutrition.
-            </p>
+    {/* BOXES */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-            <div className="space-y-4">
-              {[
-                "Sourcing & Farming – Direct farmer partnerships & sustainable cultivation",
-                "Processing & Grading – Hygienic cleaning, roasting & sorting",
-                "Wholesale Distribution – Bulk supply across India",
-                "Private Labeling & B2B – Custom branding solutions",
-                "Export – Expanding globally with premium makhana",
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-3 p-3 rounded-lg bg-white shadow-sm hover:shadow-md transition duration-300 hover:-translate-y-1 cursor-pointer"
-                >
-                  <span className="text-green-600 text-lg">✔</span>
-                  <p className="text-gray-800">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          
-
+      {[
+        "Sourcing & Farming – Direct farmer partnerships",
+        "Processing & Grading – Hygienic cleaning & roasting",
+        "Wholesale Distribution – Bulk supply across India",
+        "Private Labeling & B2B – Custom branding solutions",
+        "Export – Expanding globally with premium makhana",
+      ].map((item, index) => (
+        <div
+          key={index}
+          className="p-5 rounded-xl border border-gray-200 bg-gray-50 
+          hover:bg-white hover:shadow-lg hover:-translate-y-1 
+          transition-all duration-300 cursor-pointer"
+        >
+          <p className="text-gray-900">{item}</p>
         </div>
-      </section>
+      ))}
 
+    </div>
+
+  </div>
+</section>
+      
       {/* Featured Products */}
       <div className="flex gap-4 mb-6 justify-center">
         <button
