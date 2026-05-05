@@ -23,7 +23,7 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <h3 className="text-xl font-bold text-white mb-3">
-            MakhanaMart
+            Veenuts
           </h3>
           <p className="text-sm">
             Premium quality makhana sourced directly from farmers and
