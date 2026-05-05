@@ -335,7 +335,7 @@ Email: ${email}
           {/* LEFT IMAGE */}
           <div>
             <img
-              src="/makhana-bowl1.png" // change if needed
+              src="/processing.jpg" // change if needed
               alt="Makhana Benefits"
               className="rounded-xl shadow-lg w-full object-cover"
             />
@@ -421,17 +421,7 @@ Email: ${email}
             </div>
           </div>
 
-          {/* RIGHT IMAGE */}
-          <div className="relative group">
-            <img
-              src="/makhana-bowl.png"
-              alt="Makhana Bowl"
-              className="rounded-2xl shadow-lg w-full object-cover transition duration-500 group-hover:scale-105"
-            />
-
-            {/* glow effect */}
-            <div className="absolute inset-0 rounded-2xl bg-green-200 opacity-0 group-hover:opacity-20 transition duration-500"></div>
-          </div>
+          
 
         </div>
       </section>
@@ -639,12 +629,14 @@ Email: ${email}
             </h2>
 
             <p className="text-gray-600 mb-4">
+              We would love to hear from you whether you are a wholesaller, retailer, distributor
+              or coustomer, we are here to assist you with all your makhana product needs.
               We supply bulk quantities with private-labeling options.
               Fill the form and our sales team will get back to you within 24 hours.
             </p>
 
             <ul className="text-gray-700 space-y-2">
-              <li>• Minimum order: 10kg</li>
+              <li>• Minimum order: 100kg</li>
               <li>• Custom packaging available</li>
               <li>• Export-ready consignments</li>
             </ul>

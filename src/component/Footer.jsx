@@ -55,14 +55,27 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Contact */}
+
+        {/* HEAD OFFICE */}
         <div>
-          <h4 className="text-white font-semibold mb-3">Contact</h4>
+          <h4 className="text-white font-semibold mb-3">📍Head Office</h4>
           <ul className="space-y-2 text-sm">
-            <li>📍 Bihar, India</li>
+            <li> N-155, 2nd Floor, Mayfield Garden, Sector-51,
+              Gurugram, Haryana - 122018
+            </li>
             <li>Phone: +91 98714 37317</li>
             <li>Email: contact@veenuts.in</li>
             <li>Website: www.veenuts.com</li>
+          </ul>
+        </div>
+
+        {/* branch office */}
+        <div>
+          <h4 className="text-white font-semibold mb-3"> 📍Branch Office</h4>
+          <ul className="space-y-2 text-sm">
+           
+            <li>Railpar, K.T.Road,Tari Mohalla, ASANSOL - 713302, West Bengal</li>
+            <li>H .NO-0098, Block More, RAJGIR, NALANDA -803116, BIHAR,INDIA</li>
           </ul>
         </div>
 
@@ -78,7 +91,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-gray-700 mt-8 pt-4 text-center text-sm">
-        © {new Date().getFullYear()} MakhanaMart. All rights reserved.
+        © {new Date().getFullYear()} HSSM FOODS PRIVATE LIMITED. All rights reserved.
       </div>
     </footer>
   )
