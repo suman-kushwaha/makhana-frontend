@@ -721,7 +721,7 @@ Email: ${email}
       </section>
       
       <a
-        href="https://wa.me/917318892828"
+        href="https://wa.me/919871437317?text=Hi%2C%20I%20am%20interested%20in%20your%20makhana%20products."
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-5 right-5  p-3 rounded-full shadow-lg hover:scale-110 transition-all duration-300 z-50"
