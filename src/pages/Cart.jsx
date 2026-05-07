@@ -1,6 +1,13 @@
 import { useCart } from "../context/CartContext"
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 export default function Cart() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+
   const { cartItems, removeFromCart } = useCart()
   const navigate = useNavigate()
 
@@ -8,7 +15,6 @@ export default function Cart() {
     (sum, item) => sum + Number(item.price),
     0
   )
-
   const handleCheckout = () => {
     const itemsText = cartItems
       .map(
@@ -47,15 +53,15 @@ Total Amount: ₹${total}
           </p>
 
           <button
-            onClick={() =>{
+            onClick={() => {
               navigate("/")
-              setTimeout(()=>{
+              setTimeout(() => {
                 window.dispatchEvent(
-                new CustomEvent("scrollToSection", { detail: "products" })
-              )
-              },100)
+                  new CustomEvent("scrollToSection", { detail: "products" })
+                )
+              }, 100)
             }}
-               className="mt-6 bg-green-700 text-white px-6 py-3 rounded-md hover:bg-green-800 transition"
+            className="mt-6 bg-green-700 text-white px-6 py-3 rounded-md hover:bg-green-800 transition"
           >
             Browse Products
           </button>

@@ -60,7 +60,7 @@ const products = [
     name: "Roasted Makhana",
     flavor: "Salted",
     weight: "250g",
-    price: "₹299",
+    price: 299,
     bestseller: true,
     image: "/packaging.png",
   },
@@ -70,7 +70,7 @@ const products = [
     name: "Caramel Makhana",
     flavor: "Caramel",
     weight: "250g",
-    price: "₹249",
+    price: 249,
     bestseller: false,
     image: "/packaging.png",
   },
@@ -80,7 +80,7 @@ const products = [
     name: "Peri Peri Roasted Makhana",
     flavor: "Peri Peri",
     weight: "100g",
-    price: "₹120",
+    price: 120,
     bestseller: true,
     image: "/packaging.png",
   }
@@ -216,14 +216,14 @@ Email: ${email}
 
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-white/20 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]"></div>
 
         <div className="relative max-w-7xl mx-auto px-4 text-center ">
-          <h1 className="text-4xl md:text-5xl font-bold">
+          <h1 className="text-4xl md:text-5xl font-bold text-white "style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
             Premium Makhana for Healthy Living
           </h1>
 
-          <p className="mt-4 text-gray-700 max-w-2xl mx-auto">
+          <p className="mt-4 text-white max-w-2xl mx-auto">
             Fresh, crunchy and nutritious makhana sourced directly from farmers.
           </p>
 
