@@ -56,33 +56,52 @@ const products = [
   },
   {
     id: 6,
-    type: "retail", // 👈 NEW
-    name: "Roasted Makhana",
-    flavor: "Salted",
+    type: "retail",
+    name: "6 Suta Makhana",
+    flavor: "Premium",
     weight: "250g",
-    price: 299,
+    price: 499,
+    originalPrice: 599,
+    discount: "20%",
     bestseller: true,
     image: "/packaging.png",
   },
   {
     id: 7,
-    type: "retail", // 👈 NEW
-    name: "Caramel Makhana",
-    flavor: "Caramel",
+    type: "retail",
+    name: "5 Suta Makhana",
+    flavor: "Premium",
     weight: "250g",
-    price: 249,
-    bestseller: false,
+    price: 423,
+    originalPrice: 529,
+    discount: "20%",
+    bestseller: true,
     image: "/packaging.png",
   },
   {
     id: 8,
-    type: "retail", // 👈 NEW
-    name: "Peri Peri Roasted Makhana",
-    flavor: "Peri Peri",
-    weight: "100g",
-    price: 120,
+    type: "retail",
+    name: "4 Suta Makhana",
+    flavor: "Premium",
+    weight: "250g",
+    price: 399,
+    originalPrice: 499,
+    discount: "20%",
     bestseller: true,
-    image: "/packaging.png",
+    image: "/packaging.png"
+    ,
+  },
+  {
+  id: 9,
+  type: "retail",
+  name: "Mix Makhana",
+  flavor: "Mixed",
+  weight: "250g",
+  price: 280,
+  originalPrice: 350,
+  discount: "20%",
+  bestseller: false,
+  image: "/packaging.png"
   }
 ]
 
@@ -219,7 +238,7 @@ Email: ${email}
         <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]"></div>
 
         <div className="relative max-w-7xl mx-auto px-4 text-center ">
-          <h1 className="text-4xl md:text-5xl font-bold text-white "style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
+          <h1 className="text-4xl md:text-5xl font-bold text-white " style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
             Premium Makhana for Healthy Living
           </h1>
 
@@ -272,7 +291,7 @@ Email: ${email}
               to offering premium quality makhana(foxnuts).We are committed to creating calue for farmers,
               consumers and retailers by transforming traditional indian superfoods into modern,
               guilt-free snacks.
-            
+
             </p>
 
             <div className="grid grid-cols-2 gap-4">
@@ -391,43 +410,43 @@ Email: ${email}
           ></path>
         </svg>
       </div>
-<section className="px-6 md:px-16 py-16 bg-white">
-  <div className="max-w-5xl mx-auto text-center">
+      <section className="px-6 md:px-16 py-16 bg-white">
+        <div className="max-w-5xl mx-auto text-center">
 
-    {/* HEADING */}
-    <h2 className="text-3xl md:text-4xl font-semibold text-green-700 tracking-tight mb-4">
-      What We Do
-    </h2>
+          {/* HEADING */}
+          <h2 className="text-3xl md:text-4xl font-semibold text-green-700 tracking-tight mb-4">
+            What We Do
+          </h2>
 
-    <p className="text-gray-600 mb-10">
-      At HSSM FOODS PRIVATE LIMITED, we deliver premium makhana products from farm to table, focusing on quality, hygiene, and taste.
-    </p>
+          <p className="text-gray-600 mb-10">
+            At HSSM FOODS PRIVATE LIMITED, we deliver premium makhana products from farm to table, focusing on quality, hygiene, and taste.
+          </p>
 
-    {/* BOXES */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* BOXES */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-      {[
-        "Sourcing & Farming – Direct farmer partnerships",
-        "Processing & Grading – Hygienic cleaning & roasting",
-        "Wholesale Distribution – Bulk supply across India",
-        "Private Labeling & B2B – Custom branding solutions",
-        "Export – Expanding globally with premium makhana",
-      ].map((item, index) => (
-        <div
-          key={index}
-          className="p-5 rounded-xl border border-gray-200 bg-gray-50 
+            {[
+              "Sourcing & Farming – Direct farmer partnerships",
+              "Processing & Grading – Hygienic cleaning & roasting",
+              "Wholesale Distribution – Bulk supply across India",
+              "Private Labeling & B2B – Custom branding solutions",
+              "Export – Expanding globally with premium makhana",
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="p-5 rounded-xl border border-gray-200 bg-gray-50 
           hover:bg-white hover:shadow-lg hover:-translate-y-1 
           transition-all duration-300 cursor-pointer"
-        >
-          <p className="text-gray-900">{item}</p>
+              >
+                <p className="text-gray-900">{item}</p>
+              </div>
+            ))}
+
+          </div>
+
         </div>
-      ))}
+      </section>
 
-    </div>
-
-  </div>
-</section>
-      
       {/* Featured Products */}
       <div className="flex gap-4 mb-6 justify-center">
         <button
@@ -719,7 +738,7 @@ Email: ${email}
           </div>
         </div>
       </section>
-      
+
       <a
         href="https://wa.me/919871437317?text=Hi%2C%20I%20am%20interested%20in%20your%20makhana%20products."
         target="_blank"
