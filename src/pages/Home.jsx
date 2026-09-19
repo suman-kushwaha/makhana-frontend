@@ -1,4 +1,4 @@
-import ProductCard from "../component/ProductCard"
+ import ProductCard from "../component/ProductCard"
 import { useState, useRef, useEffect } from "react"
 import { Leaf, Flame, Package, TestTube } from 'lucide-react'
 import { MessageCircle } from "lucide-react"
@@ -10,7 +10,7 @@ const products = [
     name: " Raw Makhana",
     grade: "4-6 Suta",
     size: "Mixed (Wholesale Grade)",
-    priceRange: "₹1000 - ₹1250 / kg",
+    priceRange: "₹940 / kg",
     note: "Last lower price ₹950/kg",
     image: "/makhana-bowl.png",
   },
@@ -20,7 +20,7 @@ const products = [
     name: "Raw Makhana",
     grade: "4 Suta",
     size: "Regular / Small",
-    priceRange: "₹700 - ₹1000 / kg",
+    priceRange: "₹760 / kg",
     note: "Most common, daily use",
     image: "/makhana-bowl.png",
   },
@@ -30,7 +30,7 @@ const products = [
     name: "Raw Makhana",
     grade: "5 Suta",
     size: "Medium / Premium",
-    priceRange: "₹1050 - ₹1300 / kg",
+    priceRange: "₹1020 / kg",
     note: "Popular for snacking",
     image: "/makhana-bowl.png",
   },
@@ -40,7 +40,7 @@ const products = [
     name: "Large/Premium",
     grade: "6 Suta",
     size: "Large / Premium",
-    priceRange: "₹1300 - ₹1500 / kg",
+    priceRange: "₹1175 / kg",
     note: "Ideal for gifting",
     image: "/makhana-bowl.png",
   },
@@ -60,7 +60,7 @@ const products = [
     name: "6 Suta Makhana",
     flavor: "Premium",
     weight: "250g",
-    price: 499,
+    price: 350,
     originalPrice: 599,
     discount: "20%",
     bestseller: true,
@@ -72,7 +72,7 @@ const products = [
     name: "5 Suta Makhana",
     flavor: "Premium",
     weight: "250g",
-    price: 423,
+    price: 300,
     originalPrice: 529,
     discount: "20%",
     bestseller: true,
@@ -84,27 +84,25 @@ const products = [
     name: "4 Suta Makhana",
     flavor: "Premium",
     weight: "250g",
-    price: 399,
+    price: 220,
     originalPrice: 499,
     discount: "20%",
     bestseller: true,
-    image: "/packaging.png"
-    ,
+    image: "/packaging.png",
   },
   {
-  id: 9,
-  type: "retail",
-  name: "Mix Makhana",
-  flavor: "Mixed",
-  weight: "250g",
-  price: 280,
-  originalPrice: 350,
-  discount: "20%",
-  bestseller: false,
-  image: "/packaging.png"
+    id: 9,
+    type: "retail",
+    name: "Mix Makhana",
+    flavor: "Mixed",
+    weight: "250g",
+    price: 250,
+    originalPrice: 350,
+    discount: "20%",
+    bestseller: false,
+    image: "/packaging.png"
   }
 ]
-
 export default function Home() {
   const [category, setCategory] = useState("all")
   const heroRef = useRef(null)
