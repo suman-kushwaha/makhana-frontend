@@ -1,1 +1,26 @@
 @import "tailwindcss";
+/* =========================================
+   VEENUTS TOP MOVING BANNER
+   ========================================= */
+
+.veenuts-marquee {
+  width: max-content;
+  animation: veenuts-marquee 18s linear infinite;
+}
+
+@keyframes veenuts-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Slightly slower on mobile for readability */
+@media (max-width: 640px) {
+  .veenuts-marquee {
+    animation-duration: 14s;
+  }
+}
