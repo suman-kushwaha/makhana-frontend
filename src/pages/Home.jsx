@@ -62,7 +62,6 @@ const products = [
     weight: "250g",
     price: 350,
     originalPrice: 599,
-    discount: "20%",
     bestseller: true,
     image: "/packaging.png",
   },
@@ -74,7 +73,6 @@ const products = [
     weight: "250g",
     price: 300,
     originalPrice: 529,
-    discount: "20%",
     bestseller: true,
     image: "/packaging.png",
   },
@@ -86,7 +84,6 @@ const products = [
     weight: "250g",
     price: 220,
     originalPrice: 499,
-    discount: "20%",
     bestseller: true,
     image: "/packaging.png",
   },
@@ -98,7 +95,6 @@ const products = [
     weight: "250g",
     price: 250,
     originalPrice: 350,
-    discount: "20%",
     bestseller: false,
     image: "/packaging.png"
   }
