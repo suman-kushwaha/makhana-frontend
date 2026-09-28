@@ -1,5 +1,6 @@
  import ProductCard from "../component/ProductCard"
 import { useState, useRef, useEffect } from "react"
+import { useSearchParams } from "react-router-dom"
 import { Leaf, Flame, Package, TestTube } from 'lucide-react'
 import { MessageCircle } from "lucide-react"
 
@@ -100,7 +101,15 @@ const products = [
   }
 ]
 export default function Home() {
-  const [category, setCategory] = useState("all")
+  const [searchParams] = useSearchParams()
+
+const [category, setCategory] = useState(() => {
+  const requestedCategory = searchParams.get("category")
+
+  return ["all", "retail", "wholesale"].includes(requestedCategory)
+    ? requestedCategory
+    : "all"
+})
   const heroRef = useRef(null)
   const productsRef = useRef(null)
   const enquiryRef = useRef(null)
