@@ -229,117 +229,248 @@ Email: ${email}
 
   return (
     <div>
+      
       {/* Hero Section */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[85vh]  flex items-center bg-cover bg-center "
-        style={{ backgroundImage: "url('/makhana-bowl1.webp')" }}
+      {/* Hero Section */}
+<section
+  ref={heroRef}
+  className="relative min-h-[88vh] overflow-hidden bg-gray-900"
+>
+  {/* Background Image */}
+  <div
+    className="absolute inset-0 bg-cover bg-center"
+    style={{ backgroundImage: "url('/makhana-bowl1.webp')" }}
+  />
+
+  {/* Dark + soft overlay for text readability */}
+  <div className="absolute inset-0 bg-black/35" />
+
+  {/* Soft gradient overlay */}
+  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent" />
+
+  <div className="relative z-10 max-w-7xl mx-auto px-6 min-h-[88vh] flex items-center">
+
+    <div className="max-w-2xl py-20">
+
+      {/* Small Label */}
+      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-6">
+        <Leaf className="w-4 h-4 text-green-300" />
+        Premium Indian Superfood
+      </div>
+
+      {/* Heading */}
+      <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-white">
+        Premium Makhana.
+        <span className="block text-green-300">
+          Made for Better Snacking.
+        </span>
+      </h1>
+
+      {/* Description */}
+      <p className="mt-6 text-lg md:text-xl leading-8 text-white/80 max-w-xl">
+        Carefully selected makhana sourced from trusted farmers,
+        processed with care and brought to you for healthier,
+        crunchier snacking.
+      </p>
+
+      {/* Buttons */}
+      <div className="mt-8 flex flex-wrap gap-4">
+
+        <button
+          onClick={handleShopNowClick}
+          className="group inline-flex items-center gap-2 bg-green-600 text-white px-7 py-3.5 rounded-full font-medium shadow-lg hover:bg-green-700 hover:-translate-y-1 transition-all duration-300"
+        >
+          Shop Retail
+          <span className="group-hover:translate-x-1 transition">
+            →
+          </span>
+        </button>
+
+        <button
+          onClick={() =>
+            window.dispatchEvent(
+              new CustomEvent("scrollToSection", { detail: "enquiry" })
+            )
+          }
+          className="group inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/30 text-white px-7 py-3.5 rounded-full font-medium hover:bg-white hover:text-gray-900 hover:-translate-y-1 transition-all duration-300"
+        >
+          Wholesale / Bulk
+          <span className="group-hover:translate-x-1 transition">
+            →
+          </span>
+        </button>
+
+      </div>
+
+      {/* Trust Points */}
+      <div className="mt-10 pt-6 border-t border-white/20 flex flex-wrap gap-x-7 gap-y-3 text-sm text-white/75">
+
+        <div className="flex items-center gap-2">
+          <span className="text-green-300">✓</span>
+          Premium Quality
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="text-green-300">✓</span>
+          Direct from Farmers
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="text-green-300">✓</span>
+          Retail & Wholesale
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  {/* Bottom fade */}
+  <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/10 to-transparent" />
+
+</section>
+
+
+{/* Our Story */}
+<section
+  ref={storyRef}
+  className="py-16 bg-gradient-to-b from-gray-100 to-white"
+>
+  <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+
+    {/* Left - Image */}
+    <div
+      className="h-[380px] sm:h-[420px] lg:h-[440px]
+                 rounded-xl overflow-hidden
+                 bg-cover bg-center bg-no-repeat
+                 border border-gray-300
+                 shadow-xl shadow-black/20"
+      style={{ backgroundImage: "url('/makhana process.jpg')" }}
+    >
+    </div>
+
+    {/* Right - Content */}
+    <div>
+
+      {/* Story Heading Card */}
+      <div
+        className="inline-flex items-center gap-3 mb-5
+                   px-5 py-3 rounded-2xl
+                   bg-white border border-green-100
+                   shadow-md shadow-green-900/10
+                   hover:-translate-y-1 hover:shadow-lg
+                   transition-all duration-300"
       >
+        <span
+          className="w-10 h-10 rounded-xl bg-green-100
+                     flex items-center justify-center"
+        >
+          <Leaf className="w-5 h-5 text-green-700" />
+        </span>
 
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]"></div>
-
-        <div className="relative max-w-7xl mx-auto px-4 text-center ">
-          <h1 className="text-4xl md:text-5xl font-bold text-white " style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
-            Premium Makhana for Healthy Living
-          </h1>
-
-          <p className="mt-4 text-white max-w-2xl mx-auto">
-            Fresh, crunchy and nutritious makhana sourced directly from farmers.
+        <div>
+          <p className="text-xs uppercase tracking-[0.25em]
+                        font-semibold text-green-600">
+            Discover
           </p>
 
-          <div className="mt-6 flex justify-center gap-4">
-            <button
-              onClick={handleShopNowClick}
-              className="bg-green-700 text-white px-6 py-3 rounded-md hover:bg-green-800 transition">
-              Shop Now
-            </button>
-            <button
-              onClick={() =>
-                window.dispatchEvent(
-                  new CustomEvent("scrollToSection", { detail: "enquiry" })
-                )
-              }
-              className="bg-green-700 text-white border border-green-700 px-6 py-3 rounded-md hover:bg-green-800 transition">
-              Become a Distributor
-            </button>
-          </div>
+          <h2 className="text-2xl md:text-3xl font-bold
+                         tracking-tight text-gray-800 leading-none">
+            Our Story
+          </h2>
         </div>
-      </section>
+      </div>
 
-      {/* our story */}
-      <section ref={storyRef} className="py-16 bg-gradient-to-b from-gray-100 to-white ">
-        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
-          {/* Image / Placeholder */}
-          <div
-            className="h-72 rounded-xl overflow-hidden
-             bg-cover bg-center bg-no-repeat
-             border border-gray-400
-             shadow-xl shadow-black/30"
-            style={{ backgroundImage: "url('/makhana process.jpg')" }}
-          >
-          </div>
-          {/* Content */}
+      {/* Story Text */}
+      <p className="text-base md:text-lg text-gray-600
+                    leading-8 mb-6 font-normal">
+        HSSM FOODS PRIVATE LIMITED sources handpicked makhana from trusted
+        farmers in Bihar and processes them in hygienic facilities to deliver
+        crunchy, nutritious snacks to customers across India and abroad.
+        Veenuts is a health-focused snacking brand under HSSM Enterprises,
+        dedicated to offering premium quality makhana (foxnuts).
+      </p>
+
+      <p className="text-base md:text-lg text-gray-600
+                    leading-8 mb-7">
+        We are committed to creating value for farmers, consumers and
+        retailers by transforming traditional Indian superfoods into
+        modern, guilt-free snacks.
+      </p>
+
+      {/* Features */}
+      <div className="grid grid-cols-2 gap-5">
+
+        <div className="flex items-start gap-3">
+          <span className="bg-orange-100 text-green-700 p-2 rounded-lg">
+            ✔
+          </span>
+
           <div>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-              Our Story
-            </h2>
-
-            <p className="text-gray-600 leading-relaxed mb-6">
-              HSSM FOODS PRIVATE LIMITED sources handpicked makhana from trusted
-              farmers in Bihar and processes them in hygienic facilities to deliver
-              crunchy, nutritious snacks to customers across India and abroad.
-              Veenuts is a health-focused snacking brand under HSSM Eterprises, dedicated
-              to offering premium quality makhana(foxnuts).We are committed to creating calue for farmers,
-              consumers and retailers by transforming traditional indian superfoods into modern,
-              guilt-free snacks.
-
+            <Leaf className="text-green-600 mb-2 w-5 h-5" />
+            <p className="font-semibold text-gray-900">
+              100% Natural
             </p>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex items-start gap-3">
-                <span className="bg-orange-100 text-green-700 p-2 rounded-md">✔</span>
-                <div>
-                  <Leaf className="text-green-600 mb-2" />
-                  <p className="font-medium">100% Natural</p>
-                  <p className="text-sm text-gray-500">No preservatives</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <span className="bg-green-100 text-green-700 p-2 rounded-md">🏭</span>
-                <div>
-                  <Package className="text-orange-600 mb-2" />
-                  <p className="font-medium">Hygienic Processing</p>
-                  <p className="text-sm text-gray-500">Modern facilities</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <span className="bg-green-100 text-green-700 p-2 rounded-md">🌱</span>
-                <div>
-
-                  <p className="font-medium">Sustainably Sourced</p>
-                  <p className="text-sm text-gray-500">Support local farmers</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <span className="bg-orange-100 text-green-700 p-2 rounded-md">🧪</span>
-                <div>
-
-                  <p className="font-medium">Lab Tested</p>
-                  <p className="text-sm text-gray-500">Quality assured</p>
-                </div>
-              </div>
-            </div>
+            <p className="text-sm text-gray-500 mt-1">
+              No preservatives
+            </p>
           </div>
-
-
-
         </div>
-      </section>
+
+        <div className="flex items-start gap-3">
+          <span className="bg-green-100 text-green-700 p-2 rounded-lg">
+            🏭
+          </span>
+
+          <div>
+            <Package className="text-orange-600 mb-2 w-5 h-5" />
+            <p className="font-semibold text-gray-900">
+              Hygienic Processing
+            </p>
+            <p className="text-sm text-gray-500 mt-1">
+              Modern facilities
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-3">
+          <span className="bg-green-100 text-green-700 p-2 rounded-lg">
+            🌱
+          </span>
+
+          <div>
+            <p className="font-semibold text-gray-900">
+              Sustainably Sourced
+            </p>
+            <p className="text-sm text-gray-500 mt-1">
+              Support local farmers
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-3">
+          <span className="bg-orange-100 text-green-700 p-2 rounded-lg">
+            🧪
+          </span>
+
+          <div>
+            <p className="font-semibold text-gray-900">
+              Lab Tested
+            </p>
+            <p className="text-sm text-gray-500 mt-1">
+              Quality assured
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
 
       {/* Divider here */}
       <div className="overflow-hidden leading-none">
