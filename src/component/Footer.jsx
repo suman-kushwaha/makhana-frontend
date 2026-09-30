@@ -75,7 +75,7 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
            
             <li>Railpar, K.T.Road,Tari Mohalla, ASANSOL - 713302, West Bengal</li>
-            <li>H .NO-0098, Block More, RAJGIR, NALANDA -803116, BIHAR,INDIA</li>
+           
           </ul>
         </div>
 
