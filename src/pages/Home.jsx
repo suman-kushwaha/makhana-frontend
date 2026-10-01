@@ -296,7 +296,7 @@ Email: ${email}
               <button
                 onClick={() => handleCategoryClick("retail")}
 
-                className="group inline-flex items-center gap-2 bg-green-600 text-white px-7 py-3.5 rounded-full font-medium shadow-lg hover:bg-green-700 hover:-translate-y-1 transition-all duration-300"
+                className="group inline-flex items-center gap-2 bg-green-500 text-white px-7 py-3.5 rounded-full font-medium shadow-lg hover:bg-green-700 hover:-translate-y-1 transition-all duration-300"
               >
                 Shop Retail Products
                 <span className="group-hover:translate-x-1 transition">
