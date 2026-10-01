@@ -298,7 +298,7 @@ Email: ${email}
 
                 className="group inline-flex items-center gap-2 bg-green-600 text-white px-7 py-3.5 rounded-full font-medium shadow-lg hover:bg-green-700 hover:-translate-y-1 transition-all duration-300"
               >
-                Shop Our Retail Products
+                Shop Retail Products
                 <span className="group-hover:translate-x-1 transition">
                   →
                 </span>
@@ -307,9 +307,9 @@ Email: ${email}
               <button
                 onClick={() => handleCategoryClick("wholesale")}
 
-                className="group inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/30 text-white px-7 py-3.5 rounded-full font-medium hover:bg-white hover:text-gray-900 hover:-translate-y-1 transition-all duration-300"
+                className="group inline-flex items-center gap-2 bg-orange-600  border border-white/30 text-white px-7 py-3.5 rounded-full font-medium hover:bg-white hover:text-gray-900 hover:-translate-y-1 transition-all duration-300"
               >
-                Shop Wholesale / Bulk
+                Shop Wholesale Products 
                 <span className="group-hover:translate-x-1 transition">
                   →
                 </span>
