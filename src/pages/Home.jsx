@@ -259,15 +259,9 @@ Email: ${email}
   return (
     
     <div>
-    <script type="application/ld+json">
-      {JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Store",
-        "name": "Veenuts",
-        "description": "Wholesale and Retail Makhana Store",
-        "url": "https://veenuts.com"
-      })}
-    </script>
+      <script type="application/ld+json">
+        {JSON.stringify(productSchema)}
+      </script>
 
     {/* Hero Section */}
       {/* Hero Section */}
