@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://veenuts.com/sitemap.xml
+Sitemap: https://www.veenuts.com/sitemap.xml
