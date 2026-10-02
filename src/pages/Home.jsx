@@ -4,11 +4,12 @@ import { useSearchParams } from "react-router-dom"
 import { Leaf, Flame, Package, TestTube } from 'lucide-react'
 import { MessageCircle } from "lucide-react"
 
+
 const products = [
   {
     id: 1,
     type: "wholesale",
-    name: " Raw Makhana",
+    name: "Premium Raw Makhana ",
     grade: "4-6 Suta",
     size: "Mixed (Wholesale Grade)",
     priceRange: "₹1020 / kg",
@@ -18,7 +19,7 @@ const products = [
   {
     id: 2,
     type: "wholesale",
-    name: "Raw Makhana",
+    name: "Standard Raw Makhana ",
     grade: "4 Suta",
     size: "Regular / Small",
     priceRange: "₹720 / kg",
@@ -28,7 +29,7 @@ const products = [
   {
     id: 3,
     type: "wholesale",
-    name: "Raw Makhana",
+    name: " Jumbo Raw Makhana ",
     grade: "5 Suta",
     size: "Medium / Premium",
     priceRange: "₹1060 / kg",
@@ -48,7 +49,7 @@ const products = [
   {
     id: 5,
     type: "wholesale",
-    name: "Raw Makhana",
+    name: "Raw Makhana 7+ Suta",
     grade: "7+ Suta",
     size: "Jumbo / Export Quality",
     priceRange: "₹1500 - ₹1700 / kg",
@@ -123,6 +124,17 @@ export default function Home() {
   const productsRef = useRef(null)
   const enquiryRef = useRef(null)
   const storyRef = useRef(null)
+
+    const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": products.map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": `${p.name} ${p.grade || p.size || ''}`.trim(),
+      "url": `https://veenuts.com/#product-${p.id}`
+    }))
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -245,8 +257,19 @@ Email: ${email}
 
 
   return (
+    
     <div>
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "Veenuts",
+        "description": "Wholesale and Retail Makhana Store",
+        "url": "https://veenuts.com"
+      })}
+    </script>
 
+    {/* Hero Section */}
       {/* Hero Section */}
       {/* Hero Section */}
       <section
