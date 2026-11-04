@@ -1,9 +1,9 @@
+
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 
 export default function ProductCard({ product }) {
   const navigate = useNavigate();
-
   const { cartItems, setCartItems } = useCart();
 
   const addToCart = () => {
@@ -12,20 +12,17 @@ export default function ProductCard({ product }) {
     );
 
     if (existingItem) {
-      const updatedCart = cartItems.map((item) =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
       );
-
-      setCartItems(updatedCart);
     } else {
       setCartItems([
         ...cartItems,
-        {
-          ...product,
-          quantity: 1,
-        },
+        { ...product, quantity: 1 },
       ]);
     }
   };
@@ -34,7 +31,6 @@ export default function ProductCard({ product }) {
     (item) => item.id === product.id
   );
 
-  // AUTOMATIC DISCOUNT CALCULATION
   const discountPercentage =
     product.originalPrice && product.price
       ? Math.round(
@@ -44,287 +40,365 @@ export default function ProductCard({ product }) {
         )
       : 0;
 
+  const savings = product.originalPrice && product.price
+    ? product.originalPrice - product.price
+    : 0;
+
+  const isWholesale = product.type === "wholesale";
+
+  const whatsappMessage = isWholesale
+    ? `Hi, I am interested in the following wholesale product:
+
+Product: ${product.name}
+Grade: ${product.grade}
+Size: ${product.size}
+Price Range: ${product.priceRange}
+
+Please share more details.`
+    : `Hi, I am interested in:
+
+Product: ${product.name}
+Weight: ${product.weight}
+Price: ₹${product.price}
+
+Please share more details.`;
+
+  const whatsappLink = `https://wa.me/919871437317?text=${encodeURIComponent(
+    whatsappMessage
+  )}`;
+
   return (
-    <div
+    <article
       className="
-        group
-        flex
-        h-full
-        flex-col
-        overflow-hidden
-        rounded-2xl
-        border
-        border-gray-200
-        bg-white
-        shadow-sm
-        transition-all
-        duration-300
-        hover:-translate-y-1
-        hover:shadow-xl
+        group relative flex h-full flex-col
+        overflow-hidden rounded-3xl
+        border border-[#eae6dc]
+        bg-[#fffefa]
+        shadow-[0_4px_20px_rgba(40,55,35,0.05)]
+        transition-all duration-500
+        hover:-translate-y-2
+        hover:shadow-[0_18px_40px_rgba(40,55,35,0.12)]
       "
     >
-      {/* ================= IMAGE ================= */}
-      <div className="relative flex h-64 items-center justify-center overflow-hidden bg-gray-50">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="
-            h-full
-            w-full
-            object-contain
-            p-4
-            transition-transform
-            duration-500
-            group-hover:scale-105
-          "
-        />
+       
+{/* IMAGE SECTION */}
+<div className="
+  relative flex h-64 w-full
+  items-center justify-center
+  overflow-hidden bg-[#f5f1e8]
+">
 
-        {/* BEST SELLER */}
-        {product.type === "retail" && product.bestseller && (
-          <span
-            className="
-              absolute
-              left-3
-              top-3
-              rounded-md
-              bg-green-700
-              px-2.5
-              py-1
-              text-xs
-              font-bold
-              text-white
-              shadow-sm
-            "
-          >
-            Best Seller
-          </span>
-        )}
-      </div>
+  {/* Decorative circle - retail only */}
+  {!isWholesale && (
+    <div className="
+      absolute h-48 w-48 rounded-full
+      bg-[#e8e9d9] opacity-60
+      transition-transform duration-700
+      group-hover:scale-125
+    " />
+  )}
 
-      {/* ================= CONTENT ================= */}
+  {/* PRODUCT IMAGE */}
+  <img
+    src={product.image}
+    alt={product.name}
+    className={`
+      relative z-10 h-full w-full
+      transition-transform duration-700
+      group-hover:scale-105
+      ${
+        isWholesale
+          ? "object-cover object-center"
+          : "object-contain p-5 group-hover:scale-110"
+      }
+    `}
+  />
+
+  {/* BESTSELLER */}
+  {product.type === "retail" && product.bestseller && (
+    <span className="
+      absolute left-4 top-4 z-20
+      rounded-full bg-[#294d35]
+      px-3 py-1.5 text-[10px]
+      font-bold uppercase tracking-wider
+      text-white shadow-md
+    ">
+      ★ Bestseller
+    </span>
+  )}
+
+  {/* DISCOUNT */}
+  {!isWholesale && discountPercentage > 0 && (
+    <span className="
+      absolute right-4 top-4 z-20
+      rounded-full bg-[#e98b43]
+      px-3 py-1.5 text-xs
+      font-bold text-white shadow-md
+    ">
+      {discountPercentage}% OFF
+    </span>
+  )}
+
+  {/* WHOLESALE BADGE */}
+  {isWholesale && (
+    <span className="
+      absolute left-4 top-4 z-20
+      rounded-full bg-[#e88742]
+      px-3 py-1.5 text-[10px]
+      font-bold uppercase tracking-wider
+      text-white shadow-md
+    ">
+      Bulk Pricing
+    </span>
+  )}
+
+  {/* BRAND LABEL */}
+  <div className="
+    absolute bottom-3 right-4 z-20
+    rounded-full border border-white/70
+    bg-white/85 px-3 py-1
+    text-[10px] font-semibold
+    tracking-wide text-[#52634c]
+    backdrop-blur-sm
+  ">
+    VEENUTS • QUALITY FIRST
+  </div>
+
+</div>
+
+
+      {/* PRODUCT DETAILS */}
       <div className="flex flex-1 flex-col p-5">
 
-        {/* PRODUCT TITLE */}
-        <h3
-          className="
-            min-h-[52px]
-            text-lg
-            font-bold
-            leading-6
-            text-gray-900
-          "
-        >
+        {/* CATEGORY LABEL */}
+        <p className="
+          mb-2 text-[10px] font-bold uppercase
+          tracking-[0.18em] text-[#a17b50]
+        ">
+          {isWholesale ? "Wholesale Collection" : "Retail Collection"}
+        </p>
+
+        {/* PRODUCT NAME */}
+        <h3 className="
+          min-h-[32px] text-[17px] font-bold
+          leading-tight text-[#263c2d]
+          transition-colors duration-300
+          group-hover:text-[#557345] line-clamp-2
+        ">
+          
           {product.name}
         </h3>
+           {/* PRODUCT DESCRIPTION */}
+           {product.description && (
+            <p className="
+            mt-1.5 min-h-[36px]
+            text-[13px] leading-1.4
+             text-gray-500 line-clamp-3
+                  ">
+             {product.description}
+            </p>
+             )}
 
-        {/* ================= WHOLESALE ================= */}
-        {product.type === "wholesale" ? (
-          <div className="mt-2">
+        {/* WHOLESALE DETAILS */}
+        {isWholesale ? (
+          <div className="mt-3 space-y-2">
 
-            <p className="text-sm text-gray-500">
-              Grade:
-              <span className="ml-1 font-semibold text-gray-800">
+            <div className="
+              flex items-center justify-between
+              border-b border-dashed border-[#e5e1d7]
+              pb-2
+            ">
+              <span className="text-sm text-gray-500">
+                Grade
+              </span>
+              <span className="text-sm font-semibold text-[#344c36]">
                 {product.grade}
               </span>
-            </p>
+            </div>
 
-            <p className="mt-1 min-h-[20px] text-sm text-gray-500">
-              {product.size}
-            </p>
+            <div className="
+              flex items-center justify-between
+              border-b border-dashed border-[#e5e1d7]
+              pb-2
+            ">
+              <span className="text-sm text-gray-500">
+                Size
+              </span>
+              <span className="text-sm font-semibold text-[#344c36]">
+                {product.size}
+              </span>
+            </div>
 
-            {/* WHOLESALE PRICE */}
-            <div className="mt-4 rounded-xl bg-green-50 px-4 py-3">
-              <p className="text-xl font-extrabold text-green-800">
+            <div className="
+              mt-4 rounded-2xl
+              border border-[#e1e9dc]
+            bg-[#f0f5ed] p-4
+            ">
+              <p className="
+                mb-1 text-[10px] font-bold uppercase
+                tracking-widest text-[#71866a]
+              ">
+                Wholesale Price
+              </p>
+
+              <p className="text-2xl font-bold text-[#294d35]">
                 {product.priceRange}
               </p>
 
               {product.note && (
-                <p className="mt-1 text-xs text-gray-500">
+                <p className="mt-2 text-xs leading-5 text-gray-500">
                   {product.note}
                 </p>
               )}
             </div>
-
           </div>
         ) : (
-          /* ================= RETAIL ================= */
-          <div className="mt-2">
+          /* RETAIL DETAILS */
+          <div className="mt-3">
 
             {/* FLAVOR */}
             <div className="min-h-[30px]">
               {product.flavor && (
-                <span
-                  className="
-                    inline-flex
-                    rounded-full
-                    bg-orange-50
-                    px-3
-                    py-1
-                    text-xs
-                    font-semibold
-                    text-orange-700
-                  "
-                >
+                <span className="
+                  inline-flex items-center gap-1.5
+                  rounded-full bg-[#fff0df]
+                  px-3 py-1.5
+                  text-xs font-bold text-[#b76a30]
+                ">
+                  <span>✦</span>
                   {product.flavor}
                 </span>
               )}
             </div>
 
             {/* WEIGHT */}
-            <div className="mt-3 flex min-h-[24px] items-center gap-2">
-              <span className="text-sm font-medium uppercase tracking-wide text-gray-500">
-                Weight
-              </span>
-
-              <span className="text-sm font-semibold text-gray-800">
+            <div className="
+              mt-3 flex items-center gap-2
+              text-sm text-gray-500
+            ">
+              <span className="text-[#7b956d]">◈</span>
+              <span>Net Weight:</span>
+              <span className="font-bold text-[#344c36]">
                 {product.weight}
               </span>
             </div>
 
-            {/* ================= PRICE ROW ================= */}
-            <div className="mt-4 flex min-h-[38px] flex-wrap items-center gap-x-2 gap-y-1">
+            {/* PRICE BOX */}
+            <div className="
+              mt-4 rounded-2xl
+              border border-[#eee9dc]
+              bg-[#faf8f1] p-4
+            ">
+              <div className="flex flex-wrap items-center gap-2">
 
-              {/* CURRENT PRICE */}
-              <span className="text-2xl font-extrabold leading-none text-gray-800">
-                ₹{product.price}/
-              </span>
-
-              {/* ORIGINAL PRICE */}
-              {product.originalPrice && (
-                <span className="text-sm font-medium text-gray-400 line-through">
-                  ₹{product.originalPrice}
+                <span className="
+                  text-3xl font-semibold
+                  tracking-tight text-[#294d35]
+                ">
+                  ₹{product.price}
                 </span>
-              )}
 
-              {/* DISCOUNT */}
+                {product.originalPrice && (
+                  <span className="
+                    text-sm font-medium
+                    text-gray-400 line-through
+                  ">
+                    ₹{product.originalPrice}
+                  </span>
+                )}
+              </div>
+
               {discountPercentage > 0 && (
-                <span
-                  className="
-                    rounded-full
-                    bg-orange-100
-                    px-2.5
-                    py-1
-                    text-xs
-                    font-bold
-                    text-orange-700
-                    whitespace-nowrap
-                  "
-                >
-                  {discountPercentage}% OFF
-                </span>
+                <div className="
+                  mt-2 flex items-center gap-2
+                  text-xs font-semibold text-[#b66b34]
+                ">
+                  <span>✦</span>
+                  You save ₹{savings} on this pack!
+                </div>
               )}
             </div>
           </div>
         )}
 
-        {/* ================= BUTTONS ================= */}
-        <div className="mt-auto pt-6">
+        {/* BUTTON SECTION */}
+        <div className="mt-auto pt-5">
 
-          {product.type === "retail" ? (
-            <div className="flex gap-3">
+          {isWholesale ? (
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noreferrer"
+              className="
+                flex w-full items-center justify-center
+                gap-2 rounded-xl
+                bg-[#e88742] px-4 py-3.5
+                text-sm font-bold text-white
+                shadow-sm transition-all duration-300
+                hover:bg-[#d87632] hover:shadow-lg
+                active:scale-[0.98]
+              "
+            >
+              <span>Order on WhatsApp</span>
+              <span className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
+            </a>
+          ) : (
+            <div className="flex gap-2">
 
               {/* ADD TO CART */}
               {isInCart ? (
                 <button
                   onClick={() => navigate("/cart")}
                   className="
-                    flex-1
-                    rounded-xl
-                    bg-gray-800
-                    px-3
-                    py-3
-                    text-sm
-                    font-semibold
-                    text-white
-                    transition
-                    hover:bg-gray-900
+                    flex-1 rounded-xl
+                    bg-[#294d35] px-3 py-3.5
+                    text-sm font-bold text-white
+                    transition-all duration-300
+                    hover:bg-[#1d3b27]
                   "
                 >
-                  Go to Cart
+                  ✓ Go to Cart
                 </button>
               ) : (
                 <button
                   onClick={addToCart}
                   className="
-                    flex-1
-                    rounded-xl
-                    bg-green-700
-                    px-3
-                    py-3
-                    text-sm
-                    font-semibold
-                    text-white
-                    transition
-                    hover:bg-green-800
+                    flex-1 rounded-xl
+                    bg-[#294d35] px-3 py-3.5
+                    text-sm font-bold text-white
+                    shadow-sm transition-all duration-300
+                    hover:bg-[#1d3b27] hover:shadow-lg
+                    active:scale-[0.98]
                   "
                 >
-                  Add to Cart
+                  + Add to Cart
                 </button>
               )}
 
-              {/* ENQUIRE */}
+              {/* WHATSAPP */}
               <a
-                href={`https://wa.me/919871437317?text=${encodeURIComponent(
-                  `Hi, I am interested in:\n\n` +
-                    `Product: ${product.name}\n` +
-                    `Weight: ${product.weight}\n` +
-                    `Price: ₹${product.price}\n\n` +
-                    `Please share more details.`
-                )}`}
+                href={whatsappLink}
                 target="_blank"
                 rel="noreferrer"
+                aria-label={`Enquire about ${product.name} on WhatsApp`}
                 className="
-                  flex-1
-                  rounded-xl
-                  border
-                  border-green-700
-                  px-3
-                  py-3
-                  text-center
-                  text-sm
-                  font-semibold
-                  text-green-700
-                  transition
-                  hover:bg-green-50
+                  flex items-center justify-center
+                  rounded-xl border border-[#294d35]
+                  px-4 py-3.5
+                  text-sm font-bold text-[#294d35]
+                  transition-all duration-300
+                  hover:bg-[#edf3e9]
                 "
               >
                 Enquire
               </a>
 
             </div>
-          ) : (
-            <a
-              href={`https://wa.me/919871437317?text=${encodeURIComponent(
-                `Hi, I am interested in the following wholesale product:\n\n` +
-                  `Product: ${product.name}\n` +
-                  `Grade: ${product.grade}\n` +
-                  `Size: ${product.size}\n` +
-                  `Price Range: ${product.priceRange}\n\n` +
-                  `Please share more details.`
-              )}`}
-              target="_blank"
-              rel="noreferrer"
-              className="
-                block
-                w-full
-                rounded-xl
-                bg-orange-500
-                px-4
-                py-3
-                text-center
-                text-sm
-                font-bold
-                text-white
-                transition
-                hover:bg-orange-600
-              "
-            >
-              Order on WhatsApp
-            </a>
           )}
-
         </div>
       </div>
-    </div>
+    </article>
   );
 }
