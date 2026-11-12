@@ -49,8 +49,11 @@ export default function OfferPopup() {
           </p>
 
           <h3 className="text-xl font-bold text-[#183b56] mt-2">
-            6 Suta Premium Makhana
+             Premium Makhana 
           </h3>
+           <p className=" text-gray-500 mt-1">
+            Shaam Ki Bhook Ka Premium Ilaaj!
+          </p>
 
           <p className="text-sm text-gray-500 mt-1">
             Premium Quality · 250g Pack
@@ -58,13 +61,13 @@ export default function OfferPopup() {
 
           <div className="flex justify-center items-center gap-3 mt-4">
             <span className="text-2xl font-bold text-[#183b56]">
-              ₹499
+              ₹220
             </span>
             <span className="text-gray-400 line-through">
-              ₹599
+              ₹499
             </span>
             <span className="bg-orange-100 text-orange-700 text-xs font-bold px-2 py-1 rounded">
-              SAVE 17%
+              SAVE 56%
             </span>
           </div>
 
