@@ -71,24 +71,24 @@ Please share more details.`;
     <article
       className="
         group relative flex h-full flex-col
-        overflow-hidden rounded-3xl
-        border border-[#eae6dc]
-        bg-[#fffefa]
-        shadow-[0_4px_20px_rgba(40,55,35,0.05)]
+        overflow-hidden rounded-2xl
+        border border-[#e5e7eb] bg-white
+        shadow-sm
         transition-all duration-500
-        hover:-translate-y-2
-        hover:shadow-[0_18px_40px_rgba(40,55,35,0.12)]
+        hover:-translate-y-1
+        hover:shadow-lg
       "
     >
        
 {/* IMAGE SECTION */}
 <div className="
-  relative flex h-64 w-full
+  relative flex h-45 w-full  bg-white 
+  aspect-square
   items-center justify-center
   overflow-hidden bg-[#f5f1e8]
 ">
 
-  {/* Decorative circle - retail only */}
+  {/* Decorative circle - retail only
   {!isWholesale && (
     <div className="
       absolute h-48 w-48 rounded-full
@@ -96,7 +96,7 @@ Please share more details.`;
       transition-transform duration-700
       group-hover:scale-125
     " />
-  )}
+  )} */}
 
   {/* PRODUCT IMAGE */}
   <img
@@ -168,7 +168,7 @@ Please share more details.`;
 
 
       {/* PRODUCT DETAILS */}
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-4">
 
         {/* CATEGORY LABEL */}
         <p className="
@@ -180,10 +180,10 @@ Please share more details.`;
 
         {/* PRODUCT NAME */}
         <h3 className="
-          min-h-[32px] text-[17px] font-bold
-          leading-tight text-[#263c2d]
+          min-h-[32px] text-[17px] font-semibold
+          leading-tight text-[#263c50]
           transition-colors duration-300
-          group-hover:text-[#557345] line-clamp-2
+          group-hover:text-[#1d8488] line-clamp-2
         ">
           
           {product.name}
@@ -199,9 +199,29 @@ Please share more details.`;
             </p>
              )}
 
+             
+{/* VEENUTS QUALITY INDICATOR */}
+<div className="flex items-center gap-2 mt-2">
+  <div className="flex items-center text-sm">
+    <span className="text-[#e5a12b]">★★★★</span>
+
+    <span className="relative inline-block text-gray-300">
+      ★
+      <span className="absolute top-0 left-0 w-1/2 overflow-hidden text-[#e5a12b]">
+        ★
+      </span>
+    </span>
+  </div>
+
+  <span className="text-xs font-semibold text-gray-600">
+    4.5/5
+  </span>
+</div>
+
+
         {/* WHOLESALE DETAILS */}
         {isWholesale ? (
-          <div className="mt-3 space-y-2">
+          <div className="mt-2 space-y-1.5">
 
             <div className="
               flex items-center justify-between
@@ -230,9 +250,9 @@ Please share more details.`;
             </div>
 
             <div className="
-              mt-4 rounded-2xl
+              mt-3 rounded-xl
               border border-[#e1e9dc]
-            bg-[#f0f5ed] p-4
+            bg-[#f0f5ed] p-3
             ">
               <p className="
                 mb-1 text-[10px] font-bold uppercase
@@ -254,7 +274,7 @@ Please share more details.`;
           </div>
         ) : (
           /* RETAIL DETAILS */
-          <div className="mt-3">
+          <div className="mt-2">
 
             {/* FLAVOR */}
             <div className="min-h-[30px]">
@@ -273,7 +293,7 @@ Please share more details.`;
 
             {/* WEIGHT */}
             <div className="
-              mt-3 flex items-center gap-2
+              mt-2 flex items-center gap-2
               text-sm text-gray-500
             ">
               <span className="text-[#7b956d]">◈</span>
@@ -285,14 +305,14 @@ Please share more details.`;
 
             {/* PRICE BOX */}
             <div className="
-              mt-4 rounded-2xl
+              mt-3 rounded-xl
               border border-[#eee9dc]
-              bg-[#faf8f1] p-4
+              bg-[#faf8f1] p-3
             ">
               <div className="flex flex-wrap items-center gap-2">
 
                 <span className="
-                  text-3xl font-semibold
+                  text-2xl font-semibold
                   tracking-tight text-[#294d35]
                 ">
                   ₹{product.price}
@@ -310,7 +330,7 @@ Please share more details.`;
 
               {discountPercentage > 0 && (
                 <div className="
-                  mt-2 flex items-center gap-2
+                  mt-2 flex items-center gap-1
                   text-xs font-semibold text-[#b66b34]
                 ">
                   <span>✦</span>
@@ -320,9 +340,9 @@ Please share more details.`;
             </div>
           </div>
         )}
-
+        
         {/* BUTTON SECTION */}
-        <div className="mt-auto pt-5">
+        <div className="mt-auto pt-4">
 
           {isWholesale ? (
             <a
@@ -353,7 +373,7 @@ Please share more details.`;
                   onClick={() => navigate("/cart")}
                   className="
                     flex-1 rounded-xl
-                    bg-[#294d35] px-3 py-3.5
+                    bg-[#1d8488] px-3 py-3.5
                     text-sm font-bold text-white
                     transition-all duration-300
                     hover:bg-[#1d3b27]
@@ -366,10 +386,10 @@ Please share more details.`;
                   onClick={addToCart}
                   className="
                     flex-1 rounded-xl
-                    bg-[#294d35] px-3 py-3.5
+                    bg-[#1d8488] px-3 py-3.5
                     text-sm font-bold text-white
                     shadow-sm transition-all duration-300
-                    hover:bg-[#1d3b27] hover:shadow-lg
+                    hover:bg-[#1d8490] hover:shadow-lg
                     active:scale-[0.98]
                   "
                 >
@@ -385,11 +405,11 @@ Please share more details.`;
                 aria-label={`Enquire about ${product.name} on WhatsApp`}
                 className="
                   flex items-center justify-center
-                  rounded-xl border border-[#294d35]
+                  rounded-xl border border-[#1d8488]
                   px-4 py-3.5
-                  text-sm font-bold text-[#294d35]
+                  text-sm font-bold text-[#1d8488]
                   transition-all duration-300
-                  hover:bg-[#edf3e9]
+                  hover:bg-[#edf3e9] hover:text-[#1d3b27]
                 "
               >
                 Enquire

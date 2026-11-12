@@ -3,13 +3,15 @@ import { useState, useRef, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import { Leaf, Flame, Package, TestTube } from 'lucide-react'
 import { MessageCircle } from "lucide-react"
+import MakhanaGallery from "../component/MakhanaGallery";
+import OfferPopup from "../component/OfferPopup"
 
 
 const products = [
   {
     id: 1,
     type: "wholesale",
-    description :"A carefully graded mix of 4 and 6 Sutta makhana, offering different size varieties in one bulk selection. Suitable for wholesalers and food businesses.",
+    description: "A carefully graded mix of 4 and 6 Sutta makhana, offering different size varieties in one bulk selection. Suitable for wholesalers and food businesses.",
     name: "Mixed (4-6 Sutta) Premium Raw Makhana ",
     grade: "4-6 Sutta",
     size: "Mixed (Wholesale Grade)",
@@ -20,7 +22,7 @@ const products = [
   {
     id: 2,
     type: "wholesale",
-    description : "Small-sized makhana with a regular grade, suitable for bulk buyers looking for economical options for processing, roasting and repackaging.",
+    description: "Small-sized makhana with a regular grade, suitable for bulk buyers looking for economical options for processing, roasting and repackaging.",
     name: "4 Sutta Raw Makhana ",
     grade: "4 Sutta",
     size: "Regular / Small",
@@ -31,7 +33,7 @@ const products = [
   {
     id: 3,
     type: "wholesale",
-    description : "Medium-sized makhana with a premium grade, ideal for snacking and retail packaging. Offers a balance between size and quality for discerning buyers.",
+    description: "Medium-sized makhana with a premium grade, ideal for snacking and retail packaging. Offers a balance between size and quality for discerning buyers.",
     name: "5 Sutta Raw Makhana ",
     grade: "5 Sutta",
     size: "Medium / Premium",
@@ -42,7 +44,7 @@ const products = [
   {
     id: 4,
     type: "wholesale",
-    description : "Large-sized makhana with a premium grade, ideal for gifting and special occasions. Offers an exceptional taste and texture for discerning buyers.",
+    description: "Large-sized makhana with a premium grade, ideal for gifting and special occasions. Offers an exceptional taste and texture for discerning buyers.",
     name: "6 Sutta Large Size Raw Makhana ",
     grade: "6 Sutta",
     size: "Large / Premium",
@@ -53,7 +55,7 @@ const products = [
   {
     id: 5,
     type: "wholesale",
-    description : "High-grade makhana with a 7+ Sutta size, ideal for export and high-end market segments. Offers superior quality and taste for discerning customers.",
+    description: "High-grade makhana with a 7+ Sutta size, ideal for export and high-end market segments. Offers superior quality and taste for discerning customers.",
     name: " 7+ Sutta Raw Makhana ",
     grade: "7+ Sutta",
     size: "Jumbo / Export Quality",
@@ -106,7 +108,35 @@ const products = [
     image: "/packaging.png"
   }
 ]
+
+function useScrollReveal() {
+  useEffect(() => {
+    const elements = document.querySelectorAll(".scroll-reveal");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          } else {
+            entry.target.classList.remove("is-visible");
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+      }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+}
+
 export default function Home() {
+  useScrollReveal();
+
   const [searchParams] = useSearchParams()
 
   const [category, setCategory] = useState(() => {
@@ -130,7 +160,7 @@ export default function Home() {
   const enquiryRef = useRef(null)
   const storyRef = useRef(null)
 
-    const productSchema = {
+  const productSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "itemListElement": products.map((p, i) => ({
@@ -262,14 +292,14 @@ Email: ${email}
 
 
   return (
-    
+
     <div>
       <script type="application/ld+json">
         {JSON.stringify(productSchema)}
       </script>
 
-    {/* Hero Section */}
-      {/* Hero Section */}
+
+
       {/* Hero Section */}
       <section
         ref={heroRef}
@@ -277,28 +307,27 @@ Email: ${email}
       >
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center animate-hero-bg"
           style={{ backgroundImage: "url('/makhana-bowl1.webp')" }}
         />
 
-        {/* Dark + soft overlay for text readability */}
+        {/* Dark + soft overlay */}
         <div className="absolute inset-0 bg-black/35" />
 
-        {/* Soft gradient overlay */}
+        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 min-h-[88vh] flex items-center">
-
-          <div className="max-w-2xl py-20">
+          <div className="max-w-2xl py-20 scroll-reveal">
 
             {/* Small Label */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-6 ">
               <Leaf className="w-4 h-4 text-green-300" />
               Premium Indian Superfood
             </div>
 
             {/* Heading */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-white">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-white ">
               Premium Makhana.
               <span className="block text-green-300">
                 Made for Better Snacking.
@@ -306,18 +335,17 @@ Email: ${email}
             </h1>
 
             {/* Description */}
-            <p className="mt-6 text-lg md:text-xl leading-8 text-white/80 max-w-xl">
+            <p className="mt-6 text-lg md:text-xl leading-8 text-white/80 max-w-xl  ">
               Carefully selected makhana sourced from trusted farmers,
               processed with care and brought to you for healthier,
               crunchier snacking.
             </p>
 
             {/* Buttons */}
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-4 ">
 
               <button
                 onClick={() => handleCategoryClick("retail")}
-
                 className="group inline-flex items-center gap-2 bg-green-500 text-white px-7 py-3.5 rounded-full font-medium shadow-lg hover:bg-green-700 hover:-translate-y-1 transition-all duration-300"
               >
                 Shop Retail Products
@@ -328,10 +356,9 @@ Email: ${email}
 
               <button
                 onClick={() => handleCategoryClick("wholesale")}
-
-                className="group inline-flex items-center gap-2 bg-orange-600  border border-white/30 text-white px-7 py-3.5 rounded-full font-medium hover:bg-white hover:text-gray-900 hover:-translate-y-1 transition-all duration-300"
+                className="group inline-flex items-center gap-2 bg-orange-600 border border-white/30 text-white px-7 py-3.5 rounded-full font-medium hover:bg-white hover:text-gray-900 hover:-translate-y-1 transition-all duration-300"
               >
-                Shop Wholesale Products 
+                Shop Wholesale Products
                 <span className="group-hover:translate-x-1 transition">
                   →
                 </span>
@@ -340,7 +367,7 @@ Email: ${email}
             </div>
 
             {/* Trust Points */}
-            <div className="mt-10 pt-6 border-t border-white/20 flex flex-wrap gap-x-7 gap-y-3 text-sm text-white/75">
+            <div className="mt-10 pt-6 border-t border-white/20 flex flex-wrap gap-x-7 gap-y-3 text-sm text-white/75 -500">
 
               <div className="flex items-center gap-2">
                 <span className="text-green-300">✓</span>
@@ -358,13 +385,11 @@ Email: ${email}
               </div>
 
             </div>
-
           </div>
         </div>
 
         {/* Bottom fade */}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/10 to-transparent" />
-
       </section>
 
 
@@ -373,7 +398,7 @@ Email: ${email}
         ref={storyRef}
         className="py-16 bg-gradient-to-b from-gray-100 to-white"
       >
-        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+        <div className="max-w-7xl scroll-reveal mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
 
           {/* Left - Image */}
           <div
@@ -419,7 +444,7 @@ Email: ${email}
             </div>
 
             {/* Story Text */}
-            <p className="text-base md:text-lg text-gray-600
+            <p className="text-base scroll-reveal md:text-lg text-gray-600
                     leading-8 mb-6 font-normal">
               HSSM FOODS PRIVATE LIMITED sources handpicked makhana from trusted
               farmers in Bihar and processes them in hygienic facilities to deliver
@@ -525,7 +550,7 @@ Email: ${email}
       </div>
 
       <section className="px-6 md:px-16 py-12 bg-gray-50">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+        <div className="max-w-6xl scroll-reveal mx-auto grid md:grid-cols-2 gap-10 items-center">
 
           {/* LEFT IMAGE */}
           <div>
@@ -582,7 +607,7 @@ Email: ${email}
         </svg>
       </div>
       <section className="px-6 md:px-16 py-16 bg-white">
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="max-w-5xl scroll-reveal mx-auto text-center">
 
           {/* HEADING */}
           <h2 className="text-3xl md:text-4xl font-semibold text-green-700 tracking-tight mb-4">
@@ -623,34 +648,55 @@ Email: ${email}
         ref={productsRef}
         className="pt-16"
       ></div>
-      <div className="flex gap-4 mb-6 justify-center">
-        <button
-          onClick={() => setCategory("all")}
-          className="px-4 py-2 bg-orange-500 text-white rounded-md 
-    hover:-translate-y-1 hover:shadow-md 
-    transition-all duration-300"
-        >
-          All
-        </button>
 
-        <button
-          onClick={() => setCategory("wholesale")}
-          className="px-4 py-2 bg-green-600 text-white rounded-md 
-    hover:-translate-y-1 hover:shadow-md 
-    transition-all duration-300"
-        >
-          Wholesale
-        </button>
+        
+<div className="mb-9">
 
+  {/* Section Heading */}
+  <div className="text-center mb-5">
+    <p className="text-[10px] uppercase tracking-[0.3em] text-[#b18a4a] font-semibold mb-2">
+      Discover Veenuts
+    </p>
+    <h2 className="text-2xl md:text-3xl font-semibold text-[#263c50]">
+      Explore Our Collection
+    </h2>
+    <p className="text-sm text-gray-500 mt-2">
+      Quality makhana, made for every need
+    </p>
+  </div>
+
+  {/* Floating Glass Filter */}
+  <div className="flex justify-center">
+    <div className="relative inline-flex items-center gap-1 p-1.5
+      rounded-full bg-white/40 backdrop-blur-xl
+      border border-white/70
+      shadow-[0_8px_30px_rgba(38,60,80,0.10)]">
+
+      {[
+        { id: "all", label: "All Products" },
+        { id: "retail", label: "Retail" },
+        { id: "wholesale", label: "Wholesale" },
+      ].map((item) => (
         <button
-          onClick={() => setCategory("retail")}
-          className="px-4 py-2 bg-orange-500 text-white rounded-md 
-    hover:-translate-y-1 hover:shadow-md 
-    transition-all duration-300"
+          key={item.id}
+          onClick={() => setCategory(item.id)}
+          className={`relative z-10 px-5 sm:px-7 py-3
+            rounded-full text-xs sm:text-sm font-semibold
+            whitespace-nowrap transition-all duration-300
+            ${
+              category === item.id
+                ? "bg-[#263c50] text-white shadow-[0_4px_15px_rgba(38,60,80,0.25)]"
+                : "text-[#536273] hover:text-[#263c50] hover:bg-white/50"
+            }`}
         >
-          Retail Packets
+          {item.label}
         </button>
-      </div>
+      ))}
+
+    </div>
+  </div>
+</div>
+
 
       <section className="py-16 ">
 
@@ -666,11 +712,46 @@ Email: ${email}
           </div>
         </div>
       </section>
-        
+
+      {/* PRODUCT INFORMATION CARDS */}
+      <div className="mt-3 space-y-2">
+
+        {/* Return Policy */}
+        <div className="flex items-start gap-3 rounded-xl border border-[#eee5d8] bg-[#faf8f1] p-3">
+          <span className="text-xl">📦</span>
+
+          <div>
+            <h4 className="text-[13px] font-semibold text-[#263c50]">
+              We don't take this product back
+            </h4>
+
+            <p className="mt-1 text-[13px] leading-[17px] text-gray-500">
+              This product is non-returnable to ensure every customer receives a fresh, unused item.
+            </p>
+          </div>
+        </div>
+
+        {/* Price Information */}
+        <div className="flex items-start gap-3 rounded-xl border border-[#e5e9df] bg-[#f5f8f2] p-3">
+          <span className="text-xl">💰</span>
+
+          <div>
+            <h4 className="text-[13px] font-semibold text-[#263c50]">
+              Price Information
+            </h4>
+
+            <p className="mt-1 text-[13px] leading-[17px] text-gray-500">
+              MRP may vary by batch. Any additional packaging, handling, shipping or delivery charges will be clearly disclosed before purchase.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
       {/* Health Benefits */}
       <section className="py-16 bg-gradient-to-b from-white via-gray-50 to-white">
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl scroll-reveal mx-auto px-4">
           <h2 className="text-2xl font-bold text-gray-800 mb-8">
             Health Benefits
           </h2>
@@ -720,7 +801,7 @@ Email: ${email}
 
       {/*why to choose us */}
       <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 text-center">
+        <div className="max-w-7xl scroll-reveal mx-auto px-4 text-center">
 
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-semibold font-serif text-orange-500 tracking-tight">
@@ -769,7 +850,7 @@ Email: ${email}
       </section>
       {/* Testimonial */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 text-center ">
+        <div className="max-w-7xl scroll-reveal mx-auto px-4 text-center ">
 
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-serif font-semibold text-orange-500 tracking-tight">
@@ -816,7 +897,7 @@ Email: ${email}
       {/* Distributors & Bulk Buyers */}
       <section ref={enquiryRef} className="py-16 bg-gradient-to-br from-orange-50  to-orange-50">
 
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+        <div className="max-w-7xl scroll-reveal mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
 
           {/* Left Content */}
           <div>
@@ -926,6 +1007,8 @@ Email: ${email}
           className="w-8 h-8"
         />
       </a>
+      <MakhanaGallery />
+      <OfferPopup />
     </div>
   )
 }

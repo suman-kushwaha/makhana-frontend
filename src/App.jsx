@@ -6,6 +6,7 @@ import Cart from "./pages/Cart"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
 import Layout from "./component/Layout"
+import MakhanaGallery from "./component/MakhanaGallery"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/contact" element={<Contact />} />
     </Routes>
     </Layout>
+    
     </div>
   )
 }
